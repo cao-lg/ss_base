@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目四：销售交易数据分析 — 数智电商学习平台</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="logo-icon">&#9670;</span><span class="logo-text">数智电商学习平台</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="courses.html" class="nav-link active">课程</a>
+      <a href="agents.html" class="nav-link">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right"><div id="user-area-nav"><button class="btn-login" onclick="openLoginModal()">Coze账号登录</button></div></div>
+  </div>
+</nav>
+
+<!-- 项目Hero -->
+<div class="project-hero" style="background:linear-gradient(135deg,#f0fdf4 0%,#bbf7d0 100%)">
+  <div class="project-hero-inner">
+    <div class="project-breadcrumb"><a href="courses.html">课程</a> / 项目四</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span style="background:#16a34a;color:#fff;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0">04</span>
+      <h1 class="project-title" style="margin-bottom:0;font-size:28px">销售交易数据分析</h1>
+    </div>
+    <p class="project-desc">以"焕新家电"8.2万单1.2亿销售额四渠道为场景，搭建销售五层指标体系，掌握逻辑错误数据清洗方法，学习RFM客户分层模型与趋势预测技术，支撑备货决策。</p>
+    <div class="project-info">
+      <span class="pi-badge" style="background:#f0fdf4;color:#15803d">4个学习任务</span>
+      <span class="pi-badge" style="background:#f0fdf4;color:#16a34a">3个AI智能体</span>
+      <span class="pi-badge" style="background:#fff7ed;color:#f97316">中级难度</span>
+    </div>
+  </div>
+</div>
+
+<div class="learn-layout">
+  <!-- 侧边栏 -->
+  <aside class="learn-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">学习任务</div>
+      <ul class="task-list" id="task-list">
+        <li class="task-item active" onclick="switchTask(1,this)">
+          <span class="task-num">1</span>
+          <span>销售交易分析基本认知</span>
+        </li>
+        <li class="task-item" onclick="switchTask(2,this)">
+          <span class="task-num">2</span>
+          <span>逻辑错误数据清洗</span>
+        </li>
+        <li class="task-item" onclick="switchTask(3,this)">
+          <span class="task-num">3</span>
+          <span>销售数据分析与可视化</span>
+        </li>
+        <li class="task-item" onclick="switchTask(4,this)">
+          <span class="task-num">4</span>
+          <span>销售交易趋势预测</span>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-card" style="margin-top:16px">
+      <div class="sidebar-title">我的积分</div>
+      <div style="padding:14px 16px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#16a34a" id="sidebar-credits">--</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">当前可用积分</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="learn-main">
+
+    <!-- AI导学智能体 -->
+    <div id="agent-guide"></div>
+
+    <!-- 任务1 -->
+    <div id="task-content-1">
+      <div class="learn-section">
+        <div class="ls-title">
+          <span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#128Shopping;</span>
+          任务4.1 销售交易分析基本认知
+        </div>
+        <div class="ls-body">
+          <h4>&#9670; 案例背景</h4>
+          <p>"焕新家电"品牌在过去一年通过天猫旗舰店、京东自营、抖音小店、线下经销商四大渠道，完成8.2万笔订单，实现1.2亿元销售额。面对如此体量的销售数据，如何构建科学的指标体系，从规模、盈利、转化、库存、客户五个维度全面剖析销售健康度？</p>
+          <h4>&#9670; 销售交易分析的目的</h4>
+          <p>销售交易数据分析是通过对订单数据、商品数据、客户数据的系统化处理和分析，评估经营健康状况，识别增长机会与风险，支撑库存备货、营销投放、产品选品等核心业务决策的过程。</p>
+        </div>
+      </div>
+
+      <!-- 五层架构 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#128202;</span>销售五层指标架构</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+          <div style="padding:16px;background:#f0fdf4;border-radius:8px;border-left:4px solid #16a34a">
+            <div style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:6px">第一层：规模体量指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+              <div class="metric-card" style="border-left:3px solid #16a34a;padding:10px">
+                <div class="mc-abbr" style="color:#16a34a;font-size:12px">GMV</div>
+                <div class="mc-name" style="font-size:11px">商品总销售额</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #22c55e;padding:10px">
+                <div class="mc-abbr" style="color:#22c55e;font-size:12px">订单量</div>
+                <div class="mc-name" style="font-size:11px">总成交订单数</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #4ade80;padding:10px">
+                <div class="mc-abbr" style="color:#15803d;font-size:12px">客单价</div>
+                <div class="mc-name" style="font-size:11px">GMV/订单量</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:16px;background:#eff6ff;border-radius:8px;border-left:4px solid #3b82f6">
+            <div style="font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:6px">第二层：盈利水平指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+              <div class="metric-card" style="border-left:3px solid #3b82f6;padding:10px">
+                <div class="mc-abbr" style="color:#3b82f6;font-size:12px">毛利率</div>
+                <div class="mc-name" style="font-size:11px">销售毛利/销售额</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #60a5fa;padding:10px">
+                <div class="mc-abbr" style="color:#1d4ed8;font-size:12px">净利率</div>
+                <div class="mc-name" style="font-size:11px">净利润/销售额</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #93c5fd;padding:10px">
+                <div class="mc-abbr" style="color:#1d4ed8;font-size:12px">退款率</div>
+                <div class="mc-name" style="font-size:11px">退款金额/销售额</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:16px;background:#fff7ed;border-radius:8px;border-left:4px solid #f97316">
+            <div style="font-size:13px;font-weight:700;color:#ea580c;margin-bottom:6px">第三层：转化效率指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+              <div class="metric-card" style="border-left:3px solid #f97316;padding:10px">
+                <div class="mc-abbr" style="color:#f97316;font-size:12px">转化率</div>
+                <div class="mc-name" style="font-size:11px">下单人数/访客数</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #fb923c;padding:10px">
+                <div class="mc-abbr" style="color:#ea580c;font-size:12px">加购转化</div>
+                <div class="mc-name" style="font-size:11px">加购→下单比率</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #fdba74;padding:10px">
+                <div class="mc-abbr" style="color:#ea580c;font-size:12px">支付完成率</div>
+                <div class="mc-name" style="font-size:11px">实付订单/拍下订单</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:16px;background:#fdf4ff;border-radius:8px;border-left:4px solid #9333ea">
+            <div style="font-size:13px;font-weight:700;color:#7e22ce;margin-bottom:6px">第四层：库存健康指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+              <div class="metric-card" style="border-left:3px solid #9333ea;padding:10px">
+                <div class="mc-abbr" style="color:#9333ea;font-size:12px">库存周转</div>
+                <div class="mc-name" style="font-size:11px">销售成本/平均库存</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #a855f7;padding:10px">
+                <div class="mc-abbr" style="color:#7e22ce;font-size:12px">库销比</div>
+                <div class="mc-name" style="font-size:11px">期末库存/月销量</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #c084fc;padding:10px">
+                <div class="mc-abbr" style="color:#7e22ce;font-size:12px">缺货率</div>
+                <div class="mc-name" style="font-size:11px">缺货SKU/总SKU数</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:16px;background:#fef2f2;border-radius:8px;border-left:4px solid #ef4444">
+            <div style="font-size:13px;font-weight:700;color:#dc2626;margin-bottom:6px">第五层：客户价值指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+              <div class="metric-card" style="border-left:3px solid #ef4444;padding:10px">
+                <div class="mc-abbr" style="color:#ef4444;font-size:12px">复购率</div>
+                <div class="mc-name" style="font-size:11px">二购以上客户占比</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #f87171;padding:10px">
+                <div class="mc-abbr" style="color:#dc2626;font-size:12px">LTV</div>
+                <div class="mc-name" style="font-size:11px">客户生命周期价值</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #fca5a5;padding:10px">
+                <div class="mc-abbr" style="color:#dc2626;font-size:12px">流失率</div>
+                <div class="mc-name" style="font-size:11px">N个月未购买占比</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 毛利率计算器 -->
+        <div style="margin-top:20px;background:#f0fdf4;border-radius:8px;padding:16px;border:1px solid #bbf7d0">
+          <div style="font-size:13px;font-weight:600;color:#15803d;margin-bottom:12px">&#128161; 互动练习：计算销售毛利率</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">销售额（万元）</div>
+              <input type="number" id="revenue-val" value="100" style="width:120px;padding:6px 10px;border:1px solid #bbf7d0;border-radius:6px;font-size:13px">
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">销售毛利（万元）</div>
+              <input type="number" id="profit-val" value="30" style="width:120px;padding:6px 10px;border:1px solid #bbf7d0;border-radius:6px;font-size:13px">
+            </div>
+            <button onclick="calcGrossMargin()" style="padding:7px 16px;background:#16a34a;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer">计算毛利率</button>
+            <div id="margin-result" style="font-size:18px;font-weight:700;color:#16a34a;padding:4px 0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI指测闯关 -->
+      <div id="agent-quiz"></div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(2)" style="background:#16a34a">完成任务4.1，进入4.2 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务2 -->
+    <div id="task-content-2" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#128269;</span>任务4.2 逻辑错误数据清洗</div>
+        <div class="ls-body">
+          <h4>&#9670; 销售数据中的三类常见逻辑错误</h4>
+          <p>有别于格式错误（空值、乱码）和统计异常（极端值），逻辑错误是指数据在格式上完全正确，但违反了业务规则或现实逻辑，是最难被发现的一类数据质量问题。</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-top:12px">
+          <div style="padding:16px;background:#fef2f2;border-radius:8px;border:1px solid #fca5a5">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+              <span style="background:#ef4444;color:#fff;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600">错误类型一</span>
+              <span style="font-weight:600;font-size:14px">负数库存</span>
+            </div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+              <strong>表现：</strong>库存数量出现负值，如某SKU库存显示为 -20 件<br>
+              <strong>原因：</strong>系统同步延迟导致超卖、退货数据未及时入库、ERP多仓库数据合并错误<br>
+              <strong>处理方法：</strong>将负库存记录标记为异常，结合出入库记录进行手工核实；分析前临时替换为0或按最近有效值填充<br>
+              <strong>识别SQL：</strong><code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">WHERE inventory_qty &lt; 0</code>
+            </div>
+          </div>
+          <div style="padding:16px;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+              <span style="background:#f97316;color:#fff;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600">错误类型二</span>
+              <span style="font-weight:600;font-size:14px">未来日期订单</span>
+            </div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+              <strong>表现：</strong>订单创建时间晚于当前日期，如2025年6月出现2026年3月的订单<br>
+              <strong>原因：</strong>系统时区配置错误、数据录入人员手误、预售订单未区分标记<br>
+              <strong>处理方法：</strong>筛选出创建时间&gt;数据截止日期的记录，核实是否为合法预售单；非预售单标记删除<br>
+              <strong>识别SQL：</strong><code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">WHERE order_date &gt; CURRENT_DATE</code>
+            </div>
+          </div>
+          <div style="padding:16px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+              <span style="background:#3b82f6;color:#fff;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600">错误类型三</span>
+              <span style="font-weight:600;font-size:14px">重复订单号</span>
+            </div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+              <strong>表现：</strong>同一order_id出现两条及以上记录，导致统计结果虚增<br>
+              <strong>原因：</strong>多系统数据合并时JOIN逻辑错误、ETL管道重复执行、接口重试导致重复写入<br>
+              <strong>处理方法：</strong>按订单号分组，COUNT&gt;1的为重复订单；保留最新时间戳的记录，删除其余<br>
+              <strong>识别SQL：</strong><code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">GROUP BY order_id HAVING COUNT(*) &gt; 1</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(3)" style="background:#16a34a">完成任务4.2，进入4.3 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务3 -->
+    <div id="task-content-3" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#128200;</span>任务4.3 销售交易数据分析与可视化</div>
+        <div class="ls-body">
+          <h4>&#9670; RFM客户分层模型</h4>
+          <p>RFM模型是电商客户价值分析的经典框架，通过三个维度量化每位客户的价值，实现精准的客户分层运营：</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:12px">
+          <div style="padding:20px;background:#f0fdf4;border-radius:10px;border:2px solid #16a34a;text-align:center">
+            <div style="font-size:32px;font-weight:800;color:#16a34a">R</div>
+            <div style="font-size:14px;font-weight:700;color:#15803d;margin:8px 0 4px">Recency</div>
+            <div style="font-size:12px;color:var(--text-secondary)">最近一次购买距今天数<br>越小越好（活跃客户）</div>
+            <div style="margin-top:10px;padding:8px;background:#dcfce7;border-radius:6px;font-size:11px;color:#15803d">R&lt;30天=高价值</div>
+          </div>
+          <div style="padding:20px;background:#eff6ff;border-radius:10px;border:2px solid #3b82f6;text-align:center">
+            <div style="font-size:32px;font-weight:800;color:#3b82f6">F</div>
+            <div style="font-size:14px;font-weight:700;color:#1d4ed8;margin:8px 0 4px">Frequency</div>
+            <div style="font-size:12px;color:var(--text-secondary)">统计周期内购买次数<br>越高越好（忠诚客户）</div>
+            <div style="margin-top:10px;padding:8px;background:#dbeafe;border-radius:6px;font-size:11px;color:#1d4ed8">F≥3次=高频客户</div>
+          </div>
+          <div style="padding:20px;background:#fff7ed;border-radius:10px;border:2px solid #f97316;text-align:center">
+            <div style="font-size:32px;font-weight:800;color:#f97316">M</div>
+            <div style="font-size:14px;font-weight:700;color:#ea580c;margin:8px 0 4px">Monetary</div>
+            <div style="font-size:12px;color:var(--text-secondary)">统计周期内总消费金额<br>越高越好（高价值客户）</div>
+            <div style="margin-top:10px;padding:8px;background:#ffedd5;border-radius:6px;font-size:11px;color:#ea580c">M&gt;500元=高消费</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:10px">RFM客户分层应用</div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:12px">
+              <thead>
+                <tr style="background:#f0fdf4">
+                  <th style="padding:8px;text-align:left;border:1px solid #bbf7d0">客户类型</th>
+                  <th style="padding:8px;text-align:center;border:1px solid #bbf7d0">R</th>
+                  <th style="padding:8px;text-align:center;border:1px solid #bbf7d0">F</th>
+                  <th style="padding:8px;text-align:center;border:1px solid #bbf7d0">M</th>
+                  <th style="padding:8px;text-align:left;border:1px solid #bbf7d0">运营策略</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:8px;border:1px solid #e2e8f0">&#11088; 重要价值客户</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">高</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">高</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">高</td><td style="padding:8px;border:1px solid #e2e8f0">VIP专属服务，优先触达新品</td></tr>
+                <tr style="background:#f8fafc"><td style="padding:8px;border:1px solid #e2e8f0">&#128308; 流失高价值客户</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444">低</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">高</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">高</td><td style="padding:8px;border:1px solid #e2e8f0">高价值唤回券，专属折扣挽回</td></tr>
+                <tr><td style="padding:8px;border:1px solid #e2e8f0">&#128307; 潜力新客</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">高</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444">低</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444">低</td><td style="padding:8px;border:1px solid #e2e8f0">新人礼包，引导首次复购</td></tr>
+                <tr style="background:#f8fafc"><td style="padding:8px;border:1px solid #e2e8f0">&#128304; 一般客户</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444">低</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444">低</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444">低</td><td style="padding:8px;border:1px solid #e2e8f0">低成本触达，批量活动促活</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(4)" style="background:#16a34a">完成任务4.3，进入4.4 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务4 -->
+    <div id="task-content-4" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#128201;</span>任务4.4 销售交易趋势预测</div>
+        <div class="ls-body">
+          <h4>&#9670; 为什么需要销售预测</h4>
+          <p>销售预测是库存备货的直接依据。预测准确率每提高10%，可减少库存积压15-20%，同时降低缺货导致的销售损失。"焕新家电"迷你破壁机需要在双十一前45天完成备货，因此需要对大促期间的销量提前预测。</p>
+          <h4>&#9670; 两种常用预测方法</h4>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+          <div style="padding:20px;background:#f0fdf4;border-radius:10px;border:1px solid #bbf7d0">
+            <div style="font-size:14px;font-weight:700;color:#15803d;margin-bottom:10px">&#128200; 移动平均法（MA）</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>公式：</strong>MA(n) = 近n期销量之和 / n<br>
+              <strong>优点：</strong>简单易懂，平滑短期波动<br>
+              <strong>缺点：</strong>有滞后性，无法预测突变<br>
+              <strong>适用：</strong>平稳期日常备货预测<br><br>
+              <strong>示例：</strong>近3个月销量 8000/9500/10000，MA(3) = (8000+9500+10000)/3 ≈ 9167件
+            </div>
+          </div>
+          <div style="padding:20px;background:#eff6ff;border-radius:10px;border:1px solid #bfdbfe">
+            <div style="font-size:14px;font-weight:700;color:#1d4ed8;margin-bottom:10px">&#128202; 线性回归法</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>公式：</strong>Y = a + b×X（X为时间，Y为销量）<br>
+              <strong>优点：</strong>能捕捉趋势，支持长期预测<br>
+              <strong>缺点：</strong>假设线性增长，忽略季节性<br>
+              <strong>适用：</strong>成长期产品的趋势预测<br><br>
+              <strong>工具：</strong>Excel中使用FORECAST函数或插入趋势线即可实现
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding:14px;background:#f8fafc;border-radius:8px;border-left:3px solid #16a34a;font-size:13px">
+          <strong>&#128161; 备货公式：</strong>建议备货量 = 预测销量 × (1 + 安全库存系数)。通常大促期间安全系数取20%-30%，以防爆单缺货。
+        </div>
+      </div>
+
+      <!-- AI复盘 -->
+      <div id="agent-review"></div>
+
+      <!-- 项目自测 -->
+      <div class="learn-section" style="background:#f8fafc">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#9989;</span>项目四自测（+20积分）</div>
+        <div style="display:flex;flex-direction:column;gap:12px" id="quiz-container4">
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">1. 销售毛利率=销售毛利/销售额×100%，销售额100万元，毛利30万元，毛利率是多少？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p4q1" value="a"> 70%</label>
+              <label class="quiz-opt"><input type="radio" name="p4q1" value="b"> 30%</label>
+              <label class="quiz-opt"><input type="radio" name="p4q1" value="c"> 333%</label>
+              <label class="quiz-opt"><input type="radio" name="p4q1" value="d"> 3%</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">2. RFM模型中，R指的是什么？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p4q2" value="a"> Revenue，客户总消费金额</label>
+              <label class="quiz-opt"><input type="radio" name="p4q2" value="b"> Recency，最近一次购买时间</label>
+              <label class="quiz-opt"><input type="radio" name="p4q2" value="c"> Rank，客户价值排名</label>
+              <label class="quiz-opt"><input type="radio" name="p4q2" value="d"> Retention，客户留存率</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">3. 以下哪种情况属于"逻辑错误"数据问题？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p4q3" value="a"> 商品名称字段包含空格</label>
+              <label class="quiz-opt"><input type="radio" name="p4q3" value="b"> 订单金额字段为NULL</label>
+              <label class="quiz-opt"><input type="radio" name="p4q3" value="c"> 库存数量显示为 -5 件</label>
+              <label class="quiz-opt"><input type="radio" name="p4q3" value="d"> 日期格式为 2024/01/01</label>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="submitQuiz4()" style="align-self:flex-start;background:#16a34a">提交自测答案</button>
+          <div id="quiz-result4" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo-icon">&#9670;</span><span>数智电商学习平台</span></div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">登录后可使用AI智能体，积分自动同步</p>
+    <button class="btn-coze" onclick="mockCozeLogin()"><span class="coze-icon">C</span>使用 Coze 账号登录</button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录获赠 <strong>100积分</strong> 欢迎礼包</p>
+  </div>
+</div>
+
+<style>
+.quiz-opt { display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;cursor:pointer;transition:all 0.15s; }
+.quiz-opt:hover { border-color:#16a34a;background:#f0fdf4; }
+.quiz-q { background:#fff;border-radius:8px;padding:16px;border:1px solid var(--border); }
+</style>
+
+<script src="scripts/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initAgent('agent-guide', 'guide');
+  initAgent('agent-quiz', 'quiz');
+  initAgent('agent-review', 'review');
+  updateSidebarCredits();
+});
+
+function updateSidebarCredits() {
+  const el = document.getElementById('sidebar-credits');
+  if (el) el.textContent = APP.user ? APP.credits : '--';
+}
+
+function switchTask(num, el) {
+  document.querySelectorAll('.task-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  for (let i = 1; i <= 4; i++) {
+    const c = document.getElementById(`task-content-${i}`);
+    if (c) c.style.display = i === num ? 'block' : 'none';
+  }
+}
+
+function nextTask(num) {
+  if (!APP.user) { openLoginModal(); return; }
+  const items = document.querySelectorAll('.task-item');
+  const prevItem = items[num - 2];
+  if (prevItem) { prevItem.classList.add('done'); prevItem.querySelector('.task-num').textContent = '✓'; }
+  APP.markDone('p4', `t${num - 1}`);
+  if (num <= 4) switchTask(num, items[num - 1]);
+}
+
+function calcGrossMargin() {
+  const rev = parseFloat(document.getElementById('revenue-val').value);
+  const prof = parseFloat(document.getElementById('profit-val').value);
+  if (!rev || prof === undefined) return;
+  const margin = (prof / rev * 100).toFixed(1);
+  document.getElementById('margin-result').textContent = `毛利率 = ${margin}%`;
+}
+
+function submitQuiz4() {
+  if (!APP.user) { openLoginModal(); return; }
+  const answers = { p4q1: 'b', p4q2: 'b', p4q3: 'c' };
+  let correct = 0;
+  for (const [q, a] of Object.entries(answers)) {
+    const sel = document.querySelector(`input[name="${q}"]:checked`);
+    if (sel && sel.value === a) correct++;
+  }
+  const resultEl = document.getElementById('quiz-result4');
+  resultEl.style.display = 'block';
+  if (correct === 3) {
+    resultEl.innerHTML = '<div style="padding:12px;background:#f0fdf4;border-radius:8px;color:#16a34a;font-size:14px;font-weight:500">&#127881; 全部正确！获得 <strong>+20积分</strong></div>';
+    APP.earnCredits(20, '完成项目四自测');
+    updateSidebarCredits();
+  } else {
+    resultEl.innerHTML = `<div style="padding:12px;background:#fff7ed;border-radius:8px;color:#f97316;font-size:14px">答对 ${correct}/3 题。建议复习RFM模型与毛利率计算。</div>`;
+  }
+  APP.logInteraction('project4_quiz', 0);
+}
+</script>
+</body>
+</html>

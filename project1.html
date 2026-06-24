@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目一：开启数据驱动之旅 — 数智电商学习平台</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="logo-icon">&#9670;</span><span class="logo-text">数智电商学习平台</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="courses.html" class="nav-link active">课程</a>
+      <a href="agents.html" class="nav-link">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right"><div id="user-area-nav"><button class="btn-login" onclick="openLoginModal()">Coze账号登录</button></div></div>
+  </div>
+</nav>
+
+<!-- 项目Hero -->
+<div class="project-hero" style="background:linear-gradient(135deg,#eef2ff 0%,#e0e7ff 100%)">
+  <div class="project-hero-inner">
+    <div class="project-breadcrumb"><a href="courses.html">课程</a> / 项目一</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span style="background:#4f46e5;color:#fff;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0">01</span>
+      <h1 class="project-title" style="margin-bottom:0;font-size:28px">开启数据驱动之旅</h1>
+    </div>
+    <p class="project-desc">以"焕新家电"双十一大促为背景，理解数据的本质内涵与四大属性，掌握"数据→信息→知识→决策"四层认知递进模型，建立电商数据驱动底层逻辑。</p>
+    <div class="project-info">
+      <span class="pi-badge" style="background:#eef2ff;color:#4f46e5">2个学习任务</span>
+      <span class="pi-badge" style="background:#f0fdf4;color:#16a34a">2个AI智能体</span>
+      <span class="pi-badge" style="background:#fff7ed;color:#f97316">初级难度</span>
+    </div>
+  </div>
+</div>
+
+<div class="learn-layout">
+  <!-- 侧边栏 -->
+  <aside class="learn-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">学习任务</div>
+      <ul class="task-list" id="task-list">
+        <li class="task-item active" onclick="switchTask(1,this)">
+          <span class="task-num">1</span>
+          <span>认识数据驱动的电商世界</span>
+        </li>
+        <li class="task-item" onclick="switchTask(2,this)">
+          <span class="task-num">2</span>
+          <span>数据驱动电商的底层逻辑</span>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-card" style="margin-top:16px">
+      <div class="sidebar-title">我的积分</div>
+      <div style="padding:14px 16px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#4f46e5" id="sidebar-credits">--</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">当前可用积分</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="learn-main">
+
+    <!-- AI导学智能体 -->
+    <div id="agent-guide"></div>
+
+    <!-- 任务1 -->
+    <div id="task-content-1">
+      <div class="learn-section">
+        <div class="ls-title">
+          <span class="ls-icon" style="background:#eef2ff;color:#4f46e5">&#128202;</span>
+          任务1.1 认识数据驱动的电商世界
+        </div>
+        <div class="ls-body">
+          <h4>&#9670; 数据的本质内涵</h4>
+          <p>数据(data)作为客观事物的符号化记录或抽象表达，既是开展统计分析、科学研究等活动的事实依据，也是知识体系的核心载体。在《中华人民共和国数据安全法》中，数据是指任何以电子或者其他方式对信息的记录。</p>
+
+          <h4>&#9670; 数据的四大属性（数据二十条）</h4>
+          <p>2022年12月，《中共中央国务院关于构建数据基础制度更好发挥数据要素作用的意见》明确了数据作为"第五大生产要素"的地位，并指出其四大独特属性：</p>
+        </div>
+      </div>
+
+      <!-- 四大属性卡片 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#eef2ff;color:#4f46e5">&#9679;</span>数据四大属性</div>
+        <div class="metric-grid">
+          <div class="metric-card" style="border-left:3px solid #4f46e5">
+            <div class="mc-abbr" style="color:#4f46e5">非竞争性</div>
+            <div class="mc-name">Non-Rivalry</div>
+            <div class="mc-desc">一个苹果我吃了你就不能吃，但一组数据我用了你还能用。边际成本趋近于零。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #0ea5e9">
+            <div class="mc-abbr" style="color:#0ea5e9">可复制性</div>
+            <div class="mc-name">Replicability</div>
+            <div class="mc-desc">数据可以被无限复制，且复制过程中不会损耗原始数据的质量，不同于土地、资本。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #f97316">
+            <div class="mc-abbr" style="color:#f97316">无限增长性</div>
+            <div class="mc-name">Unlimited Growth</div>
+            <div class="mc-desc">每一次交易、每一次点击、每一次互动都在产生新的数据。数据不是越用越少，而是越用越多。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #16a34a">
+            <div class="mc-abbr" style="color:#16a34a">价值易变性</div>
+            <div class="mc-name">Value Volatility</div>
+            <div class="mc-desc">同一组数据，在不同场景、不同时间、不同组合下，价值可能天差地别。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIKW模型 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#128161;</span>数据认知四层递进模型（DIKW）</div>
+        <div style="display:flex;gap:0;margin-top:8px">
+          <div class="dikw-step" style="flex:1;padding:16px;background:#eef2ff;border-radius:8px 0 0 8px;border:1px solid #c7d2fe">
+            <div style="font-size:12px;color:#6366f1;font-weight:600;text-transform:uppercase;margin-bottom:6px">Data 数据</div>
+            <div style="font-size:13px;color:#1e1b4b">原始符号、未加工的数字与文字</div>
+            <div style="font-size:11px;color:#6366f1;margin-top:6px">例：2024、15.2万亿元</div>
+          </div>
+          <div style="width:1px;background:#c7d2fe"></div>
+          <div class="dikw-step" style="flex:1;padding:16px;background:#e0f2fe;border:1px solid #bae6fd">
+            <div style="font-size:12px;color:#0284c7;font-weight:600;text-transform:uppercase;margin-bottom:6px">Information 信息</div>
+            <div style="font-size:13px;color:#0c4a6e">经过加工、具有意义的数据</div>
+            <div style="font-size:11px;color:#0284c7;margin-top:6px">例：2024年网上零售额15.2万亿元</div>
+          </div>
+          <div style="width:1px;background:#bae6fd"></div>
+          <div class="dikw-step" style="flex:1;padding:16px;background:#fff7ed;border:1px solid #fed7aa">
+            <div style="font-size:12px;color:#ea580c;font-weight:600;text-transform:uppercase;margin-bottom:6px">Knowledge 知识</div>
+            <div style="font-size:13px;color:#431407">对信息的规律性总结，能指导行动</div>
+            <div style="font-size:11px;color:#ea580c;margin-top:6px">例：线上消费已成主流，企业必须布局</div>
+          </div>
+          <div style="width:1px;background:#fed7aa"></div>
+          <div class="dikw-step" style="flex:1;padding:16px;background:#f0fdf4;border-radius:0 8px 8px 0;border:1px solid #bbf7d0">
+            <div style="font-size:12px;color:#16a34a;font-weight:600;text-transform:uppercase;margin-bottom:6px">Decision 决策</div>
+            <div style="font-size:13px;color:#14532d">基于知识做出的行动选择</div>
+            <div style="font-size:11px;color:#16a34a;margin-top:6px">例：将30%预算转移到直播电商</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:12px;background:#f8fafc;border-radius:8px;font-size:13px;color:var(--text-secondary)">
+          &#128161; <strong>核心洞察：</strong>数据不是目的，决策才是。数据的终极价值在于支撑更优的决策。
+        </div>
+      </div>
+
+      <!-- 指标闯关 -->
+      <div id="agent-quiz"></div>
+
+      <!-- 完成按钮 -->
+      <div style="text-align:center;padding:20px 0">
+        <button class="btn-primary" onclick="completeTask('p1','t1')">标记任务1.1完成，继续任务1.2 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务2（初始隐藏） -->
+    <div id="task-content-2" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#eef2ff;color:#4f46e5">&#128200;</span>任务1.2 数据驱动电商世界的底层逻辑</div>
+        <div class="ls-body">
+          <h4>&#9670; 数据驱动运营的完整闭环</h4>
+          <p>数据驱动电商世界遵循一个完整的闭环机制，分为四个核心环节：</p>
+        </div>
+      </div>
+
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fff7ed;color:#f97316">&#128260;</span>数据驱动四大环节</div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px">
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:#f8fafc;border-radius:8px;border-left:3px solid #4f46e5">
+            <div style="width:36px;height:36px;background:#eef2ff;color:#4f46e5;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0">①</div>
+            <div>
+              <div style="font-weight:600;margin-bottom:4px;font-size:14px">数据采集：业务行为转化为数据记录</div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">通过埋点技术记录用户点击、滑动、停留；商品管理系统记录库存价格变化；交易系统记录订单全生命周期；客服系统记录用户情感与需求。</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:#f8fafc;border-radius:8px;border-left:3px solid #0ea5e9">
+            <div style="width:36px;height:36px;background:#e0f2fe;color:#0ea5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0">②</div>
+            <div>
+              <div style="font-weight:600;margin-bottom:4px;font-size:14px">数据整合：零散数据汇聚为数据资源</div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">数据湖存储原始格式海量数据；数据仓库存储清洗后的结构化数据；数据集市面向特定业务领域。解决"多源异构"问题是关键。</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:#f8fafc;border-radius:8px;border-left:3px solid #f97316">
+            <div style="width:36px;height:36px;background:#fff7ed;color:#f97316;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0">③</div>
+            <div>
+              <div style="font-weight:600;margin-bottom:4px;font-size:14px">数据分析：从海量数据提炼洞察与知识</div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">描述性分析回答"发生了什么"；诊断性分析回答"为什么发生"；预测性分析回答"将要发生什么"；指导性分析回答"应该怎么做"。</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;background:#f8fafc;border-radius:8px;border-left:3px solid #16a34a">
+            <div style="width:36px;height:36px;background:#f0fdf4;color:#16a34a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0">④</div>
+            <div>
+              <div style="font-weight:600;margin-bottom:4px;font-size:14px">数据应用：洞察转化为决策与行动</div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">每次商品推荐、价格调整、营销投放、库存优化，都是数据分析结果的直接应用。这也是本课程六个项目的实践方向。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 法律合规提示 -->
+      <div class="learn-section" style="border-left:3px solid #ef4444">
+        <div class="ls-title"><span class="ls-icon" style="background:#fef2f2;color:#ef4444">&#128218;</span>【数守底线】数据安全法律合规</div>
+        <div class="ls-body">
+          <p>《中华人民共和国数据安全法》第四十五条规定：开展数据处理活动的组织不履行数据安全保护义务的，可处<strong>五万元以上二百万元以下罚款</strong>。</p>
+          <p>在选品、推广等业务环节中，若为追求效率违规处理数据，将直接触发法律红线。数据安全已从"技术合规"升维为"战略底线"。</p>
+        </div>
+      </div>
+
+      <!-- AI加速 -->
+      <div id="agent-boost"></div>
+
+      <!-- 项目自测 -->
+      <div class="learn-section" style="background:#f8fafc">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#9989;</span>项目自测（+20积分）</div>
+        <div style="display:flex;flex-direction:column;gap:12px" id="quiz-container">
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">1. 以下哪项不是数据的四大属性之一？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="q1" value="a"> 非竞争性</label>
+              <label class="quiz-opt"><input type="radio" name="q1" value="b"> 可复制性</label>
+              <label class="quiz-opt"><input type="radio" name="q1" value="c"> 稀缺性</label>
+              <label class="quiz-opt"><input type="radio" name="q1" value="d"> 价值易变性</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">2. DIKW模型中，"2024年网上零售额15.2万亿元"属于哪个层级？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="q2" value="a"> 数据（Data）</label>
+              <label class="quiz-opt"><input type="radio" name="q2" value="b"> 信息（Information）</label>
+              <label class="quiz-opt"><input type="radio" name="q2" value="c"> 知识（Knowledge）</label>
+              <label class="quiz-opt"><input type="radio" name="q2" value="d"> 决策（Decision）</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">3. 数据驱动电商的闭环不包含哪个环节？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="q3" value="a"> 数据采集</label>
+              <label class="quiz-opt"><input type="radio" name="q3" value="b"> 数据整合</label>
+              <label class="quiz-opt"><input type="radio" name="q3" value="c"> 数据销售</label>
+              <label class="quiz-opt"><input type="radio" name="q3" value="d"> 数据应用</label>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="submitQuiz()" style="align-self:flex-start">提交自测答案</button>
+          <div id="quiz-result" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo-icon">&#9670;</span><span>数智电商学习平台</span></div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">登录后可使用AI智能体，积分自动同步</p>
+    <button class="btn-coze" onclick="mockCozeLogin()"><span class="coze-icon">C</span>使用 Coze 账号登录</button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录获赠 <strong>100积分</strong> 欢迎礼包</p>
+  </div>
+</div>
+
+<style>
+.quiz-opt { display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;cursor:pointer;transition:all 0.15s; }
+.quiz-opt:hover { border-color:#4f46e5;background:#eef2ff; }
+.quiz-q { background:#fff;border-radius:8px;padding:16px;border:1px solid var(--border); }
+.dikw-step { transition:all 0.2s; }
+.dikw-step:hover { transform:translateY(-2px); }
+</style>
+
+<script src="scripts/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initAgent('agent-guide', 'guide');
+  initAgent('agent-quiz', 'quiz');
+  initAgent('agent-boost', 'boost');
+  updateSidebarCredits();
+});
+
+function updateSidebarCredits() {
+  const el = document.getElementById('sidebar-credits');
+  if (el) el.textContent = APP.user ? APP.credits : '--';
+}
+
+function switchTask(num, el) {
+  document.querySelectorAll('.task-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('[id^="task-content-"]').forEach(t => t.style.display = 'none');
+  document.getElementById(`task-content-${num}`).style.display = 'block';
+}
+
+function completeTask(projectId, taskId) {
+  if (!APP.user) { openLoginModal(); return; }
+  APP.markDone(projectId, taskId);
+  document.querySelectorAll('.task-item')[0].classList.add('done');
+  document.querySelectorAll('.task-item')[0].querySelector('.task-num').textContent = '✓';
+  switchTask(2, document.querySelectorAll('.task-item')[1]);
+  showToast('任务1.1完成！');
+}
+
+function submitQuiz() {
+  if (!APP.user) { openLoginModal(); return; }
+  const answers = { q1: 'c', q2: 'b', q3: 'c' };
+  let correct = 0;
+  for (const [q, a] of Object.entries(answers)) {
+    const sel = document.querySelector(`input[name="${q}"]:checked`);
+    if (sel && sel.value === a) correct++;
+  }
+  const resultEl = document.getElementById('quiz-result');
+  resultEl.style.display = 'block';
+  if (correct === 3) {
+    resultEl.innerHTML = '<div style="padding:12px;background:#f0fdf4;border-radius:8px;color:#16a34a;font-size:14px;font-weight:500">&#127881; 全部正确！获得 <strong>+20积分</strong></div>';
+    APP.earnCredits(20, '完成项目一自测');
+    updateSidebarCredits();
+  } else {
+    resultEl.innerHTML = `<div style="padding:12px;background:#fff7ed;border-radius:8px;color:#f97316;font-size:14px">答对 ${correct}/3 题。建议复习相关内容后再次尝试。</div>`;
+  }
+  APP.logInteraction('project1_quiz', 0);
+}
+</script>
+</body>
+</html>

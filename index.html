@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据驱动电商 — 智能教学平台</title>
+<link rel="stylesheet" href="styles/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="topnav" id="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="logo-icon">&#9670;</span>
+      <span class="logo-text">数智电商学习平台</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">首页</a>
+      <a href="courses.html" class="nav-link">课程</a>
+      <a href="agents.html" class="nav-link">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right">
+      <div id="user-area-nav">
+        <button class="btn-login" onclick="openLoginModal()">Coze账号登录</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero区 -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">AI × 数据 × 电商</div>
+    <h1 class="hero-title">数据驱动，<br>掌控电商全链路</h1>
+    <p class="hero-desc">从选品到物流，用真实业务场景 + Coze AI智能体，<br>带你成为真正的「数据操盘手」。</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openLoginModal()">开始学习 &#8599;</button>
+      <a href="courses.html" class="btn-ghost">浏览课程</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">实战项目</span></div>
+      <div class="stat-item"><span class="stat-num">12+</span><span class="stat-label">AI智能体</span></div>
+      <div class="stat-item"><span class="stat-num">50+</span><span class="stat-label">核心指标</span></div>
+      <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">积分兑换</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="chain-diagram">
+      <div class="chain-node node-1"><span class="node-icon">&#9670;</span><span>选品</span></div>
+      <div class="chain-arrow">&#8594;</div>
+      <div class="chain-node node-2"><span class="node-icon">&#9670;</span><span>商品</span></div>
+      <div class="chain-arrow">&#8594;</div>
+      <div class="chain-node node-3"><span class="node-icon">&#9670;</span><span>推广</span></div>
+      <div class="chain-arrow">&#8594;</div>
+      <div class="chain-node node-4"><span class="node-icon">&#9670;</span><span>销售</span></div>
+      <div class="chain-arrow">&#8594;</div>
+      <div class="chain-node node-5"><span class="node-icon">&#9670;</span><span>客服</span></div>
+      <div class="chain-arrow">&#8594;</div>
+      <div class="chain-node node-6"><span class="node-icon">&#9670;</span><span>物流</span></div>
+    </div>
+    <p class="chain-label">全链路数据驱动电商体系</p>
+  </div>
+</section>
+
+<!-- 课程卡片区 -->
+<section class="section section-courses">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>六大实战项目</h2>
+      <p>以「焕新家电」双十一大促为贯穿主线，真实业务场景驱动学习</p>
+    </div>
+    <div class="course-grid">
+
+      <a href="project1.html" class="course-card" data-proj="1">
+        <div class="card-top c1">
+          <div class="card-num">01</div>
+          <div class="card-icon">&#128202;</div>
+        </div>
+        <div class="card-body">
+          <h3>开启数据驱动之旅</h3>
+          <p>数据基础概念、电商数据生态、"数据→信息→知识→决策"四层认知递进</p>
+          <div class="card-tags">
+            <span class="tag">数据概念</span>
+            <span class="tag">驱动逻辑</span>
+            <span class="tag">电商数据</span>
+          </div>
+          <div class="card-meta">
+            <span class="meta-tasks">2个任务</span>
+            <span class="meta-ai">&#128161; AI智能体 ×2</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project2.html" class="course-card" data-proj="2">
+        <div class="card-top c2">
+          <div class="card-num">02</div>
+          <div class="card-icon">&#128270;</div>
+        </div>
+        <div class="card-body">
+          <h3>商品选品数据分析</h3>
+          <p>市场容量评估、竞争态势分析、商品热度筛选、选品组合可视化</p>
+          <div class="card-tags">
+            <span class="tag">GMV</span>
+            <span class="tag">CRn</span>
+            <span class="tag">影刀RPA</span>
+          </div>
+          <div class="card-meta">
+            <span class="meta-tasks">5个任务</span>
+            <span class="meta-ai">&#128161; AI智能体 ×3</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project3.html" class="course-card" data-proj="3">
+        <div class="card-top c3">
+          <div class="card-num">03</div>
+          <div class="card-icon">&#128200;</div>
+        </div>
+        <div class="card-body">
+          <h3>营销推广数据分析</h3>
+          <p>多渠道ROI评估、漏斗转化分析、归因模型、推广效果可视化</p>
+          <div class="card-tags">
+            <span class="tag">CTR/ROI</span>
+            <span class="tag">漏斗分析</span>
+            <span class="tag">归因模型</span>
+          </div>
+          <div class="card-meta">
+            <span class="meta-tasks">4个任务</span>
+            <span class="meta-ai">&#128161; AI智能体 ×2</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project4.html" class="course-card" data-proj="4">
+        <div class="card-top c4">
+          <div class="card-num">04</div>
+          <div class="card-icon">&#128179;</div>
+        </div>
+        <div class="card-body">
+          <h3>销售交易数据分析</h3>
+          <p>销售五层指标体系、异常数据清洗、趋势预测、供应链协同备货</p>
+          <div class="card-tags">
+            <span class="tag">销售预测</span>
+            <span class="tag">库存健康</span>
+            <span class="tag">数据清洗</span>
+          </div>
+          <div class="card-meta">
+            <span class="meta-tasks">4个任务</span>
+            <span class="meta-ai">&#128161; AI智能体 ×3</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project5.html" class="course-card" data-proj="5">
+        <div class="card-top c5">
+          <div class="card-num">05</div>
+          <div class="card-icon">&#127775;</div>
+        </div>
+        <div class="card-body">
+          <h3>客户服务数据分析</h3>
+          <p>服务效率指标、客户满意度分析、痛点定位、CRM策略优化</p>
+          <div class="card-tags">
+            <span class="tag">满意度</span>
+            <span class="tag">首解率</span>
+            <span class="tag">飞书多维表格</span>
+          </div>
+          <div class="card-meta">
+            <span class="meta-tasks">5个任务</span>
+            <span class="meta-ai">&#128161; AI智能体 ×2</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project6.html" class="course-card" data-proj="6">
+        <div class="card-top c6">
+          <div class="card-num">06</div>
+          <div class="card-icon">&#128666;</div>
+        </div>
+        <div class="card-body">
+          <h3>物流履约数据分析</h3>
+          <p>时效/质量/成本三维指标、Power BI可视化、物流公司效能评估</p>
+          <div class="card-tags">
+            <span class="tag">准时送达率</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">成本优化</span>
+          </div>
+          <div class="card-meta">
+            <span class="meta-tasks">4个任务</span>
+            <span class="meta-ai">&#128161; AI智能体 ×3</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- AI智能体亮点区 -->
+<section class="section section-agents">
+  <div class="section-inner">
+    <div class="section-header light">
+      <h2>Coze AI 智能体助学体系</h2>
+      <p>用自己的Coze账号登录，积分驱动学习，每次交互生成你的专属学习画像</p>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-feature">
+        <div class="af-icon af-1">&#127775;</div>
+        <h4>AI导学智能体</h4>
+        <p>每个项目开篇，以业务场景引入，帮助建立学习动机与认知框架</p>
+      </div>
+      <div class="agent-feature">
+        <div class="af-icon af-2">&#127919;</div>
+        <h4>指标闯关智能体</h4>
+        <p>学完指标即测，自动诊断掌握程度，精准定位薄弱环节</p>
+      </div>
+      <div class="agent-feature">
+        <div class="af-icon af-3">&#128301;</div>
+        <h4>AI加速智能体</h4>
+        <p>调用真实工具（影刀RPA、Power BI Copilot）完成实操任务，激活数字技能</p>
+      </div>
+      <div class="agent-feature">
+        <div class="af-icon af-4">&#128084;</div>
+        <h4>复盘助训智能体</h4>
+        <p>项目完成后深度复盘，帮助从"完成任务"到"形成决策思维"的跃迁</p>
+      </div>
+    </div>
+    <div class="credits-demo">
+      <div class="credits-box">
+        <div class="credits-title">&#129689; 积分使用规则</div>
+        <div class="credits-list">
+          <div class="credit-row"><span>每次使用AI导学智能体</span><span class="cost">-5积分</span></div>
+          <div class="credit-row"><span>指标闯关（每关）</span><span class="cost">-3积分</span></div>
+          <div class="credit-row"><span>AI加速实操</span><span class="cost">-10积分</span></div>
+          <div class="credit-row"><span>复盘助训</span><span class="cost">-8积分</span></div>
+          <div class="credit-row earn"><span>完成项目自测</span><span class="earn-pts">+20积分</span></div>
+          <div class="credit-row earn"><span>观看完整课程</span><span class="earn-pts">+10积分</span></div>
+          <div class="credit-row earn"><span>每日登录签到</span><span class="earn-pts">+5积分</span></div>
+        </div>
+        <div class="credits-note">积分由Coze平台管理，登录后自动同步</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 学习路径区 -->
+<section class="section section-path">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>学习路径设计</h2>
+      <p>遵循「认知→实操→复盘→迁移」螺旋上升逻辑</p>
+    </div>
+    <div class="path-flow">
+      <div class="path-step">
+        <div class="ps-num">1</div>
+        <div class="ps-content">
+          <h4>AI导学</h4>
+          <p>业务场景激活认知，建立学习动机</p>
+        </div>
+      </div>
+      <div class="path-arrow">&#8594;</div>
+      <div class="path-step">
+        <div class="ps-num">2</div>
+        <div class="ps-content">
+          <h4>知识学习</h4>
+          <p>指标体系 + 分析方法系统讲解</p>
+        </div>
+      </div>
+      <div class="path-arrow">&#8594;</div>
+      <div class="path-step">
+        <div class="ps-num">3</div>
+        <div class="ps-content">
+          <h4>指测闯关</h4>
+          <p>即学即测，闯关诊断薄弱点</p>
+        </div>
+      </div>
+      <div class="path-arrow">&#8594;</div>
+      <div class="path-step">
+        <div class="ps-num">4</div>
+        <div class="ps-content">
+          <h4>实操任务</h4>
+          <p>真实数据 + AI工具完成业务分析</p>
+        </div>
+      </div>
+      <div class="path-arrow">&#8594;</div>
+      <div class="path-step">
+        <div class="ps-num">5</div>
+        <div class="ps-content">
+          <h4>项目自测</h4>
+          <p>综合评估，收获积分与学习报告</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 底部 -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-icon">&#9670;</span>
+      <span>数智电商学习平台</span>
+    </div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号，积分数据由Coze平台管理，符合数据安全法合规要求</div>
+  </div>
+</footer>
+
+<!-- 登录弹窗 -->
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">使用你的Coze账号登录，积分自动同步，学习数据实时记录</p>
+    <button class="btn-coze" onclick="mockCozeLogin()">
+      <span class="coze-icon">C</span>
+      使用 Coze 账号登录
+    </button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录将自动创建学习档案，并获得 <strong>100积分</strong> 作为欢迎礼包</p>
+  </div>
+</div>
+
+<script src="scripts/app.js"></script>
+</body>
+</html>

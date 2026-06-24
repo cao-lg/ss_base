@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI智能体中心 — 数智电商学习平台</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="logo-icon">&#9670;</span><span class="logo-text">数智电商学习平台</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="courses.html" class="nav-link">课程</a>
+      <a href="agents.html" class="nav-link active">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right"><div id="user-area-nav"><button class="btn-login" onclick="openLoginModal()">Coze账号登录</button></div></div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>AI智能体中心</h1>
+    <p>12个专属智能体，覆盖导学、闯关、实操、复盘全学习流程，积分驱动深度学习</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+
+    <!-- 积分状态 -->
+    <div id="credits-banner" style="display:none" class="learn-section" style="margin-bottom:32px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px">当前可用积分</div>
+        <div style="font-size:32px;font-weight:700;color:var(--accent)" id="credits-display">0</div>
+      </div>
+      <div style="font-size:13px;color:var(--text-secondary);text-align:right">
+        <div>每日签到 +5积分</div>
+        <div>完成项目自测 +20积分</div>
+      </div>
+    </div>
+
+    <!-- 智能体分类 -->
+    <div style="margin-bottom:32px">
+      <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap">
+        <button class="filter-btn active" data-filter="all" onclick="filterAgents('all',this)">全部</button>
+        <button class="filter-btn" data-filter="guide" onclick="filterAgents('guide',this)">AI导学</button>
+        <button class="filter-btn" data-filter="quiz" onclick="filterAgents('quiz',this)">指测闯关</button>
+        <button class="filter-btn" data-filter="boost" onclick="filterAgents('boost',this)">AI加速</button>
+        <button class="filter-btn" data-filter="review" onclick="filterAgents('review',this)">复盘助训</button>
+      </div>
+
+      <div id="agents-list" class="agents-full-grid">
+        <!-- 动态生成 -->
+      </div>
+    </div>
+
+    <!-- Coze平台集成说明 -->
+    <div class="learn-section">
+      <div class="ls-title"><span class="ls-icon" style="background:#eef2ff;color:#4f46e5">&#128279;</span>Coze平台集成说明</div>
+      <div class="ls-body">
+        <p>本平台所有AI智能体托管于 <strong>Coze平台</strong>，通过以下方式与教学系统集成：</p>
+        <h4>1. 账号授权流程（OAuth 2.0）</h4>
+        <p>学生使用自己的Coze账号登录，系统通过OAuth 2.0协议获取授权令牌，无需重复注册。首次登录获赠100积分启动礼包。</p>
+        <h4>2. 积分与使用限制</h4>
+        <p>每个智能体调用消耗不同积分，积分余额由Coze平台统一管理，每次调用实时扣除。积分不足时可通过完成学习任务、项目自测获得补充。</p>
+        <h4>3. 学习数据采集</h4>
+        <p>每次与智能体的交互记录包含：使用时间、使用时长、提问内容类型、回答评分，用于生成学习画像报告，帮助老师了解学生知识掌握薄弱点。</p>
+        <h4>4. 数据隐私合规</h4>
+        <p>所有数据采集遵循《中华人民共和国数据安全法》要求，学生数据脱敏处理，聚合分析仅用于教学改进目的。</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo-icon">&#9670;</span><span>数智电商学习平台</span></div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号，积分数据由Coze平台管理</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">使用你的Coze账号登录，积分自动同步</p>
+    <button class="btn-coze" onclick="mockCozeLogin()"><span class="coze-icon">C</span>使用 Coze 账号登录</button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录将自动创建学习档案，并获得 <strong>100积分</strong> 作为欢迎礼包</p>
+  </div>
+</div>
+
+<style>
+.agents-full-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+.agent-card {
+  background:#fff; border-radius:var(--radius); border:1px solid var(--border);
+  overflow:hidden; transition:all 0.2s; cursor:pointer;
+}
+.agent-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.08); }
+.ac-top { padding:20px; display:flex; align-items:center; gap:14px; }
+.ac-icon { width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0; }
+.ac-meta { flex:1; }
+.ac-meta h3 { font-size:15px;font-weight:600;margin-bottom:4px; }
+.ac-meta .ac-type { font-size:12px; }
+.ac-cost { font-size:13px;color:var(--text-secondary);font-weight:500; }
+.ac-body { padding:0 20px 20px; }
+.ac-body p { font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px; }
+.ac-body .btn-primary { font-size:13px;padding:8px 16px; }
+.filter-btn {
+  padding:7px 16px; border-radius:20px; border:1px solid var(--border);
+  background:#fff; cursor:pointer; font-size:13px; color:var(--text-secondary);
+  transition:all 0.15s;
+}
+.filter-btn:hover, .filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+</style>
+
+<script src="scripts/app.js"></script>
+<script>
+const ALL_AGENTS = [
+  { id:'a1', project:'项目一', name:'解锁电商人的"上帝视角"', type:'guide', cost:5, icon:'&#128161;', color:'#eef2ff', iconColor:'#4f46e5', desc:'以"焕新家电"双十一大促为背景，通过ROI拆解，引导学生识别数据分析中的信息不对称与决策盲区。' },
+  { id:'a2', project:'项目一', name:'数据认知诊断', type:'quiz', cost:3, icon:'&#127919;', color:'#e0f2fe', iconColor:'#0ea5e9', desc:'测试学生对数据概念、四大属性、DIKW模型的掌握程度，精准诊断薄弱知识点。' },
+  { id:'a3', project:'项目二', name:'选品决策破局思考', type:'guide', cost:5, icon:'&#128161;', color:'#eef2ff', iconColor:'#4f46e5', desc:'以"智享生活"三款候选商品为场景，引导学生思考如何用数据而非直觉做选品决策。' },
+  { id:'a4', project:'项目二', name:'选品指标闯关', type:'quiz', cost:3, icon:'&#127919;', color:'#e0f2fe', iconColor:'#0ea5e9', desc:'GMV/GR/PR/CRn/MS/EB等核心指标场景题，学完即测，高效定位掌握盲区。' },
+  { id:'a5', project:'项目二', name:'小红书乘风AI选品分析', type:'boost', cost:10, icon:'&#128301;', color:'#fff7ed', iconColor:'#f97316', desc:'接入小红书乘风平台，AI辅助分析商品趋势、竞品格局，快速完成市场情报报告。' },
+  { id:'a6', project:'项目三', name:'推广效果复盘破局', type:'guide', cost:5, icon:'&#128161;', color:'#eef2ff', iconColor:'#4f46e5', desc:'以双十一五渠道200万销售额为场景，引导学生识别不同渠道的短期与长期价值差异。' },
+  { id:'a7', project:'项目三', name:'归因分析加速器', type:'boost', cost:10, icon:'&#128301;', color:'#fff7ed', iconColor:'#f97316', desc:'智能体辅助计算末次点击/线性/时间衰减等多种归因模型，对比各渠道实际贡献值。' },
+  { id:'a8', project:'项目四', name:'销售复盘与备货计划', type:'review', cost:8, icon:'&#128084;', color:'#fdf2f8', iconColor:'#db2777', desc:'双十一结束后，AI助力深度复盘四渠道销售数据，输出精准的季度备货计划建议。' },
+  { id:'a9', project:'项目四', name:'预测结果自查验证', type:'boost', cost:10, icon:'&#128301;', color:'#fff7ed', iconColor:'#f97316', desc:'上传销售趋势数据，AI智能体快速验证预测模型准确度，识别异常预测区间。' },
+  { id:'a10', project:'项目五', name:'服务痛点诊断', type:'guide', cost:5, icon:'&#128161;', color:'#eef2ff', iconColor:'#4f46e5', desc:'以客服数据（首解率58%、满意度3.6分）引导学生建立服务指标分析思维框架。' },
+  { id:'a11', project:'项目六', name:'数据规约自动化处理', type:'boost', cost:10, icon:'&#128301;', color:'#fff7ed', iconColor:'#f97316', desc:'龙虾智能体辅助批量处理物流原始数据，完成规约、去重、格式标准化全流程。' },
+  { id:'a12', project:'项目六', name:'选取高效物流公司', type:'review', cost:8, icon:'&#128084;', color:'#fdf2f8', iconColor:'#db2777', desc:'基于三家快递公司的时效/成本/质量多维数据，AI辅助建立评价模型，输出选择建议。' },
+];
+
+let currentFilter = 'all';
+
+function filterAgents(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAgents();
+}
+
+function renderAgents() {
+  const list = document.getElementById('agents-list');
+  const filtered = currentFilter === 'all' ? ALL_AGENTS : ALL_AGENTS.filter(a => a.type === currentFilter);
+
+  list.innerHTML = filtered.map(a => `
+    <div class="agent-card" data-type="${a.type}">
+      <div class="ac-top">
+        <div class="ac-icon" style="background:${a.color};color:${a.iconColor}">${a.icon}</div>
+        <div class="ac-meta">
+          <h3>${a.name}</h3>
+          <div class="ac-type" style="color:${a.iconColor}">${getTypeName(a.type)} · ${a.project}</div>
+        </div>
+        <div class="ac-cost">-${a.cost}积分</div>
+      </div>
+      <div class="ac-body">
+        <p>${a.desc}</p>
+        <button class="btn-primary" onclick="useAgent('${a.id}','${a.type}',${a.cost})">立即使用 &#8599;</button>
+      </div>
+    </div>`).join('');
+}
+
+function getTypeName(type) {
+  return { guide:'AI导学', quiz:'指测闯关', boost:'AI加速', review:'复盘助训' }[type] || type;
+}
+
+function useAgent(id, type, cost) {
+  if (!APP.user) { openLoginModal(); return; }
+  if (APP.credits < cost) { showToast(`积分不足，需要 ${cost} 积分`); return; }
+  showToast(`正在启动${getTypeName(type)}智能体...`);
+  APP.logInteraction(`agent_center_${id}`, cost);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderAgents();
+  if (APP.user) {
+    const banner = document.getElementById('credits-banner');
+    if (banner) { banner.style.display = 'flex'; }
+    const cd = document.getElementById('credits-display');
+    if (cd) { cd.textContent = APP.credits; }
+  }
+});
+</script>
+</body>
+</html>

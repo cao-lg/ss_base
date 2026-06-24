@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>所有课程 — 数智电商学习平台</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="logo-icon">&#9670;</span><span class="logo-text">数智电商学习平台</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="courses.html" class="nav-link active">课程</a>
+      <a href="agents.html" class="nav-link">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right"><div id="user-area-nav"><button class="btn-login" onclick="openLoginModal()">Coze账号登录</button></div></div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>全部课程</h1>
+    <p>六大项目，完整覆盖电商「选品→商品→推广→销售→客户→物流」全链路数据分析</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+
+    <!-- 课程概览统计 -->
+    <div class="dashboard-grid" style="margin-bottom:40px">
+      <div class="dash-card">
+        <div class="dash-num">6</div>
+        <div class="dash-label">实战项目</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num">24</div>
+        <div class="dash-label">学习任务</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num">12+</div>
+        <div class="dash-label">AI智能体</div>
+      </div>
+    </div>
+
+    <!-- 学习进度（登录后显示） -->
+    <div id="my-progress" style="display:none" class="learn-section" style="margin-bottom:32px">
+      <div class="ls-title"><span class="ls-icon" style="background:#eef2ff;color:#4f46e5">&#128200;</span>我的学习进度</div>
+      <div id="progress-container"></div>
+    </div>
+
+    <!-- 课程列表 -->
+    <div class="course-grid">
+      <a href="project1.html" class="course-card" data-proj="1">
+        <div class="card-top c1"><div class="card-num">01</div><div class="card-icon">&#128202;</div></div>
+        <div class="card-body">
+          <h3>开启数据驱动之旅</h3>
+          <p>理解数据基础概念、电商数据生态、"数据→信息→知识→决策"四层认知递进模型，建立电商数据驱动底层逻辑。</p>
+          <div class="card-tags"><span class="tag">数据概念</span><span class="tag">数据属性</span><span class="tag">驱动逻辑</span></div>
+          <div class="card-meta"><span class="meta-tasks">2个任务</span><span class="meta-ai">&#128161; ×2 智能体</span></div>
+        </div>
+      </a>
+      <a href="project2.html" class="course-card" data-proj="2">
+        <div class="card-top c2"><div class="card-num">02</div><div class="card-icon">&#128270;</div></div>
+        <div class="card-body">
+          <h3>商品选品数据分析</h3>
+          <p>掌握GMV/GR/CRn等选品指标，学会市场容量评估、竞争态势分析、商品热度筛选与影刀RPA数据采集。</p>
+          <div class="card-tags"><span class="tag">GMV/CRn</span><span class="tag">竞品分析</span><span class="tag">影刀RPA</span></div>
+          <div class="card-meta"><span class="meta-tasks">5个任务</span><span class="meta-ai">&#128161; ×3 智能体</span></div>
+        </div>
+      </a>
+      <a href="project3.html" class="course-card" data-proj="3">
+        <div class="card-top c3"><div class="card-num">03</div><div class="card-icon">&#128200;</div></div>
+        <div class="card-body">
+          <h3>营销推广数据分析</h3>
+          <p>构建CTR/ROI/CVR指标体系，掌握漏斗转化分析、多渠道归因模型和推广效果可视化呈现方法。</p>
+          <div class="card-tags"><span class="tag">ROI分析</span><span class="tag">漏斗模型</span><span class="tag">归因分析</span></div>
+          <div class="card-meta"><span class="meta-tasks">4个任务</span><span class="meta-ai">&#128161; ×2 智能体</span></div>
+        </div>
+      </a>
+      <a href="project4.html" class="course-card" data-proj="4">
+        <div class="card-top c4"><div class="card-num">04</div><div class="card-icon">&#128179;</div></div>
+        <div class="card-body">
+          <h3>销售交易数据分析</h3>
+          <p>搭建规模/盈利/效率/库存/客户五层指标体系，学习销售趋势预测与供应链协同备货科学决策。</p>
+          <div class="card-tags"><span class="tag">销售预测</span><span class="tag">库存管理</span><span class="tag">数据清洗</span></div>
+          <div class="card-meta"><span class="meta-tasks">4个任务</span><span class="meta-ai">&#128161; ×3 智能体</span></div>
+        </div>
+      </a>
+      <a href="project5.html" class="course-card" data-proj="5">
+        <div class="card-top c5"><div class="card-num">05</div><div class="card-icon">&#127775;</div></div>
+        <div class="card-body">
+          <h3>客户服务数据分析</h3>
+          <p>建立服务效率/质量/客户价值指标体系，学习满意度分析、服务痛点定位与CRM飞书多维表格应用。</p>
+          <div class="card-tags"><span class="tag">满意度分析</span><span class="tag">首解率</span><span class="tag">飞书</span></div>
+          <div class="card-meta"><span class="meta-tasks">5个任务</span><span class="meta-ai">&#128161; ×2 智能体</span></div>
+        </div>
+      </a>
+      <a href="project6.html" class="course-card" data-proj="6">
+        <div class="card-top c6"><div class="card-num">06</div><div class="card-icon">&#128666;</div></div>
+        <div class="card-body">
+          <h3>物流履约数据分析</h3>
+          <p>从时效/质量/成本三维度构建物流指标体系，掌握Power BI可视化报告生成与物流公司效能评估。</p>
+          <div class="card-tags"><span class="tag">准时送达率</span><span class="tag">Power BI</span><span class="tag">成本分析</span></div>
+          <div class="card-meta"><span class="meta-tasks">4个任务</span><span class="meta-ai">&#128161; ×3 智能体</span></div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo-icon">&#9670;</span><span>数智电商学习平台</span></div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号，积分数据由Coze平台管理，符合数据安全法合规要求</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">使用你的Coze账号登录，积分自动同步</p>
+    <button class="btn-coze" onclick="mockCozeLogin()"><span class="coze-icon">C</span>使用 Coze 账号登录</button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录将自动创建学习档案，并获得 <strong>100积分</strong> 作为欢迎礼包</p>
+  </div>
+</div>
+
+<script src="scripts/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (APP.user) {
+    document.getElementById('my-progress').style.display = 'block';
+    const projectData = [
+      { id: 'p1', name: '项目一：开启数据驱动之旅', tasks: 2, color: '#4f46e5' },
+      { id: 'p2', name: '项目二：商品选品数据分析', tasks: 5, color: '#0ea5e9' },
+      { id: 'p3', name: '项目三：营销推广数据分析', tasks: 4, color: '#f97316' },
+      { id: 'p4', name: '项目四：销售交易数据分析', tasks: 4, color: '#16a34a' },
+      { id: 'p5', name: '项目五：客户服务数据分析', tasks: 5, color: '#db2777' },
+      { id: 'p6', name: '项目六：物流履约数据分析', tasks: 4, color: '#9333ea' },
+    ];
+    renderProgressBars(projectData);
+  }
+});
+</script>
+</body>
+</html>

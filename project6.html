@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目六：物流履约数据分析 — 数智电商学习平台</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="logo-icon">&#9670;</span><span class="logo-text">数智电商学习平台</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="courses.html" class="nav-link active">课程</a>
+      <a href="agents.html" class="nav-link">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right"><div id="user-area-nav"><button class="btn-login" onclick="openLoginModal()">Coze账号登录</button></div></div>
+  </div>
+</nav>
+
+<!-- 项目Hero -->
+<div class="project-hero" style="background:linear-gradient(135deg,#faf5ff 0%,#e9d5ff 100%)">
+  <div class="project-hero-inner">
+    <div class="project-breadcrumb"><a href="courses.html">课程</a> / 项目六</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span style="background:#9333ea;color:#fff;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0">06</span>
+      <h1 class="project-title" style="margin-bottom:0;font-size:28px">物流履约数据分析</h1>
+    </div>
+    <p class="project-desc">以"鲜享优选"生鲜电商三季度物流成本80万、准时送达率89%低于行业标准为场景，掌握送货速度/服务质量/物流成本三维度指标，学会龙虾智能体辅助数据规约，借助Power BI与Copilot构建物流KPI仪表板。</p>
+    <div class="project-info">
+      <span class="pi-badge" style="background:#faf5ff;color:#7e22ce">4个学习任务</span>
+      <span class="pi-badge" style="background:#f0fdf4;color:#16a34a">3个AI智能体</span>
+      <span class="pi-badge" style="background:#fff7ed;color:#f97316">高级难度</span>
+    </div>
+  </div>
+</div>
+
+<div class="learn-layout">
+  <!-- 侧边栏 -->
+  <aside class="learn-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">学习任务</div>
+      <ul class="task-list" id="task-list">
+        <li class="task-item active" onclick="switchTask(1,this)">
+          <span class="task-num">1</span>
+          <span>认识物流核心指标</span>
+        </li>
+        <li class="task-item" onclick="switchTask(2,this)">
+          <span class="task-num">2</span>
+          <span>数据规约</span>
+        </li>
+        <li class="task-item" onclick="switchTask(3,this)">
+          <span class="task-num">3</span>
+          <span>物流效率分析</span>
+        </li>
+        <li class="task-item" onclick="switchTask(4,this)">
+          <span class="task-num">4</span>
+          <span>Power BI数据可视化</span>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-card" style="margin-top:16px">
+      <div class="sidebar-title">我的积分</div>
+      <div style="padding:14px 16px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#9333ea" id="sidebar-credits">--</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">当前可用积分</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="learn-main">
+
+    <!-- AI导学智能体 -->
+    <div id="agent-guide"></div>
+
+    <!-- 任务1 -->
+    <div id="task-content-1">
+      <div class="learn-section">
+        <div class="ls-title">
+          <span class="ls-icon" style="background:#faf5ff;color:#9333ea">&#128666;</span>
+          任务6.1 认识物流核心指标
+        </div>
+        <div class="ls-body">
+          <h4>&#9670; 案例背景</h4>
+          <p>"鲜享优选"是一家专注生鲜品类的电商平台，三季度数据显示：物流总成本80万元，订单量1.2万单，准时送达率（OTDR）89%，低于生鲜行业标准95%；货损率（PIR）3.8%，高于行业标准2%。物流成本在总营收中占比高达22%，是影响盈利的核心变量。</p>
+          <h4>&#9670; 物流履约数据分析的意义</h4>
+          <p>物流履约是电商"最后一公里"的核心体验，直接影响客户满意度与复购率。通过系统化分析物流数据，可以识别低效环节、优化快递商选择、改善区域配送策略，在降低物流成本的同时提升服务质量。</p>
+        </div>
+      </div>
+
+      <!-- 三维度指标 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#faf5ff;color:#9333ea">&#128202;</span>物流核心指标三维度</div>
+
+        <!-- 第一维度：送货速度 -->
+        <div style="margin-top:12px;padding:18px;background:#faf5ff;border-radius:10px;border-left:4px solid #9333ea">
+          <div style="font-size:14px;font-weight:700;color:#7e22ce;margin-bottom:12px">&#128337; 维度一：送货速度指标</div>
+          <div class="metric-grid" style="grid-template-columns:1fr 1fr;gap:12px">
+            <div class="metric-card" style="border-left:3px solid #9333ea">
+              <div class="mc-abbr" style="color:#9333ea">ADT</div>
+              <div class="mc-name">平均配送时长</div>
+              <div class="mc-desc">Average Delivery Time = 总配送时长之和 / 订单量。衡量整体配送效率，生鲜类&lt;24h为优。</div>
+            </div>
+            <div class="metric-card" style="border-left:3px solid #a855f7">
+              <div class="mc-abbr" style="color:#a855f7">OTDR</div>
+              <div class="mc-name">准时送达率</div>
+              <div class="mc-desc">On-Time Delivery Rate = 承诺时间内签收订单数 / 总订单数 × 100%。行业标准≥95%。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第二维度：服务质量 -->
+        <div style="margin-top:12px;padding:18px;background:#eff6ff;border-radius:10px;border-left:4px solid #3b82f6">
+          <div style="font-size:14px;font-weight:700;color:#1d4ed8;margin-bottom:12px">&#128230; 维度二：服务质量指标</div>
+          <div class="metric-grid" style="grid-template-columns:1fr 1fr;gap:12px">
+            <div class="metric-card" style="border-left:3px solid #3b82f6">
+              <div class="mc-abbr" style="color:#3b82f6">PIR</div>
+              <div class="mc-name">货损率</div>
+              <div class="mc-desc">Package Incident Rate = 损坏/丢失订单数 / 总订单数 × 100%。生鲜类标准&lt;2%。</div>
+            </div>
+            <div class="metric-card" style="border-left:3px solid #60a5fa">
+              <div class="mc-abbr" style="color:#1d4ed8">ITR</div>
+              <div class="mc-name">库存周转率</div>
+              <div class="mc-desc">Inventory Turnover Rate = 销售成本 / 平均库存。周转率低代表库存积压，过高则缺货风险增加。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第三维度：物流成本 -->
+        <div style="margin-top:12px;padding:18px;background:#fff7ed;border-radius:10px;border-left:4px solid #f97316">
+          <div style="font-size:14px;font-weight:700;color:#ea580c;margin-bottom:12px">&#128176; 维度三：物流成本指标</div>
+          <div class="metric-grid" style="grid-template-columns:1fr 1fr 1fr;gap:12px">
+            <div class="metric-card" style="border-left:3px solid #f97316">
+              <div class="mc-abbr" style="color:#f97316">单均运费</div>
+              <div class="mc-name">Shipping Cost/Order</div>
+              <div class="mc-desc">总物流成本/总订单量。"鲜享优选"为80万/1.2万=66.7元/单。</div>
+            </div>
+            <div class="metric-card" style="border-left:3px solid #fb923c">
+              <div class="mc-abbr" style="color:#ea580c">物流占比</div>
+              <div class="mc-name">Logistics Cost Ratio</div>
+              <div class="mc-desc">物流总成本/营收×100%。行业健康标准&lt;15%，"鲜享优选"22%偏高。</div>
+            </div>
+            <div class="metric-card" style="border-left:3px solid #fdba74">
+              <div class="mc-abbr" style="color:#ea580c">退件成本</div>
+              <div class="mc-name">Return Cost</div>
+              <div class="mc-desc">因退件产生的额外物流费用，通常为正向运费的1.5-2倍。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OTDR计算器 -->
+        <div style="margin-top:20px;background:#faf5ff;border-radius:8px;padding:16px;border:1px solid #e9d5ff">
+          <div style="font-size:13px;font-weight:600;color:#7e22ce;margin-bottom:12px">&#128161; 互动练习：计算准时送达率OTDR</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">总订单数</div>
+              <input type="number" id="total-orders" value="1000" style="width:120px;padding:6px 10px;border:1px solid #e9d5ff;border-radius:6px;font-size:13px">
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">准时签收订单数</div>
+              <input type="number" id="ontime-orders" value="900" style="width:120px;padding:6px 10px;border:1px solid #e9d5ff;border-radius:6px;font-size:13px">
+            </div>
+            <button onclick="calcOTDR()" style="padding:7px 16px;background:#9333ea;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer">计算OTDR</button>
+            <div id="otdr-result" style="font-size:18px;font-weight:700;color:#9333ea;padding:4px 0"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(2)" style="background:#9333ea">完成任务6.1，进入6.2 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务2 -->
+    <div id="task-content-2" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#faf5ff;color:#9333ea">&#129302;</span>任务6.2 数据规约（龙虾智能体辅助）</div>
+        <div class="ls-body">
+          <h4>&#9670; 什么是数据规约</h4>
+          <p>数据规约（Data Reduction）是在保持数据原有分析价值的前提下，通过降维、压缩、聚合等手段减少数据量，提高处理效率的过程。对于"鲜享优选"数百万条物流明细数据，直接分析效率极低，需先进行规约。</p>
+          <h4>&#9670; 物流数据的主要规约方法</h4>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+          <div style="padding:14px 16px;background:#faf5ff;border-radius:8px;border:1px solid #e9d5ff">
+            <div style="font-weight:600;color:#7e22ce;margin-bottom:6px;font-size:13px">&#9312; 维度规约：删除无关字段</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">物流数据通常有50+字段，分析物流效率只需保留：订单ID、下单时间、发货时间、签收时间、快递公司、收货省份、商品重量、运费、是否准时。其余字段（如快递员姓名、中间站点ID）可删除。</div>
+          </div>
+          <div style="padding:14px 16px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe">
+            <div style="font-weight:600;color:#1d4ed8;margin-bottom:6px;font-size:13px">&#9313; 数量规约：聚合统计</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">将每条订单明细按"快递公司×省份×周"进行分组聚合，计算每组的平均配送时长、准时率、货损率，将数百万条数据压缩为数千行分析汇总表，分析效率提升100倍以上。</div>
+          </div>
+          <div style="padding:14px 16px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0">
+            <div style="font-weight:600;color:#15803d;margin-bottom:6px;font-size:13px">&#9314; 数据规范化：统一量纲</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">将不同快递公司的配送时长单位统一为"小时"（部分平台以分钟记录）；将各省份简称统一（"粤"-&gt;"广东省"）；将日期格式统一为 YYYY-MM-DD HH:MM:SS。</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding:16px;background:#f3e8ff;border-radius:8px;border:1px solid #c4b5fd">
+          <div style="font-size:13px;font-weight:700;color:#7e22ce;margin-bottom:8px">&#129302; 龙虾智能体辅助数据规约</div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+            龙虾（Lobster）智能体是本课程集成的AI数据处理助手，可以通过自然语言指令完成数据规约任务：<br>
+            <strong>指令示例：</strong>"帮我将物流明细表按快递公司和省份分组，计算每组的准时率和平均配送时长，输出汇总表"<br>
+            智能体会自动生成Python/SQL代码并执行，大幅降低数据处理门槛。
+          </div>
+        </div>
+      </div>
+
+      <!-- AI加速 -->
+      <div id="agent-boost"></div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(3)" style="background:#9333ea">完成任务6.2，进入6.3 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务3 -->
+    <div id="task-content-3" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#faf5ff;color:#9333ea">&#128200;</span>任务6.3 物流效率分析</div>
+        <div class="ls-body">
+          <h4>&#9670; 三大分析维度</h4>
+        </div>
+
+        <!-- 时效分析 -->
+        <div style="padding:18px;background:#faf5ff;border-radius:10px;border:1px solid #e9d5ff;margin-top:12px">
+          <div style="font-weight:700;color:#7e22ce;margin-bottom:10px;font-size:14px">分析一：配送时效分析</div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+            <strong>核心问题：</strong>哪个时段/哪类订单配送时间最长？<br>
+            <strong>分析方法：</strong>绘制配送时长分布直方图，识别异常长尾；按下单时段分析，识别高峰期时效恶化<br>
+            <strong>"鲜享优选"发现：</strong>周末下单订单ADT比工作日高6.2小时，原因是周六配送中心不排班，导致周末订单积压到周一才发货
+          </div>
+        </div>
+
+        <!-- 快递公司对比 -->
+        <div style="margin-top:12px">
+          <div style="font-weight:600;color:#374151;margin-bottom:10px;font-size:13px">分析二：快递公司综合绩效对比</div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:12px">
+              <thead>
+                <tr style="background:#faf5ff">
+                  <th style="padding:10px 8px;text-align:left;border:1px solid #e9d5ff">快递公司</th>
+                  <th style="padding:10px 8px;text-align:center;border:1px solid #e9d5ff">订单占比</th>
+                  <th style="padding:10px 8px;text-align:center;border:1px solid #e9d5ff">OTDR</th>
+                  <th style="padding:10px 8px;text-align:center;border:1px solid #e9d5ff">PIR货损率</th>
+                  <th style="padding:10px 8px;text-align:center;border:1px solid #e9d5ff">单均运费</th>
+                  <th style="padding:10px 8px;text-align:center;border:1px solid #e9d5ff">综合评级</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:8px;border:1px solid #e2e8f0">顺丰速运</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">35%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">97%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">0.8%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444">95元</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;background:#f0fdf4;color:#16a34a;font-weight:600">&#11088; 优秀</td></tr>
+                <tr style="background:#f8fafc"><td style="padding:8px;border:1px solid #e2e8f0">京东物流</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">28%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">95%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">1.2%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#f97316">82元</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;background:#f0fdf4;color:#16a34a;font-weight:600">&#128308; 良好</td></tr>
+                <tr><td style="padding:8px;border:1px solid #e2e8f0">中通快递</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">22%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#f97316;font-weight:600">84%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444;font-weight:600">4.5%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">52元</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;background:#fef2f2;color:#ef4444;font-weight:600">&#10060; 待改进</td></tr>
+                <tr style="background:#f8fafc"><td style="padding:8px;border:1px solid #e2e8f0">圆通速递</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">15%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#f97316;font-weight:600">88%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#ef4444;font-weight:600">3.1%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a">48元</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;background:#fff7ed;color:#f97316;font-weight:600">&#128310; 一般</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:10px;padding:12px;background:#f8fafc;border-radius:8px;font-size:13px;color:var(--text-secondary)">
+            &#128161; <strong>结论：</strong>中通/圆通货损率高于行业标准，生鲜类商品不适合使用，建议将这37%的订单迁移至顺丰/京东，虽单均成本提升约30元，但货损引发的退换货成本可下降60%+。
+          </div>
+        </div>
+
+        <!-- 区域分析 -->
+        <div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:8px;border-left:3px solid #9333ea">
+          <div style="font-weight:600;color:#7e22ce;margin-bottom:8px;font-size:13px">分析三：区域差异分析</div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+            按省份汇总OTDR，识别物流薄弱区域。"鲜享优选"发现：华南及长三角地区OTDR达97%，而西北/西南地区仅82%，主要原因是末端配送网点密度不足。<br>
+            <strong>建议：</strong>在西北/西南核心城市建立前置仓，将生鲜商品提前备货至当地，实现"次日达"并降低长途运损。
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(4)" style="background:#9333ea">完成任务6.3，进入6.4 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务4 -->
+    <div id="task-content-4" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#faf5ff;color:#9333ea">&#128207;</span>任务6.4 Power BI数据可视化</div>
+        <div class="ls-body">
+          <h4>&#9670; Power BI简介</h4>
+          <p>Microsoft Power BI是一款商业智能工具，通过可视化拖拽方式构建交互式数据仪表板。相比Excel，Power BI支持百万级数据的快速处理、多数据源接入、移动端查看，是企业级物流数据分析的主流工具。</p>
+          <h4>&#9670; 构建物流KPI仪表板的步骤</h4>
+          <ol style="margin-left:20px;line-height:2">
+            <li><strong>数据接入：</strong>将清洗后的物流汇总表从Excel/数据库导入Power BI</li>
+            <li><strong>建立数据模型：</strong>创建订单表、快递商表、区域表之间的关联关系</li>
+            <li><strong>创建计算列和度量值：</strong>用DAX公式计算OTDR、ADT、PIR等核心指标</li>
+            <li><strong>设计仪表板：</strong>添加KPI卡片（OTDR/ADT/PIR当前值与目标值对比）、趋势折线图、快递商对比条形图、区域热力图</li>
+            <li><strong>发布与共享：</strong>发布到Power BI Service，设置定时刷新，团队成员可通过浏览器或手机实时查看</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- KPI仪表板示意 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#faf5ff;color:#9333ea">&#128221;</span>"鲜享优选"物流KPI仪表板示意</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px">
+          <div style="padding:16px;background:#fef2f2;border-radius:10px;border:1px solid #fca5a5;text-align:center">
+            <div style="font-size:12px;color:#dc2626;margin-bottom:4px">准时送达率 OTDR</div>
+            <div style="font-size:32px;font-weight:800;color:#ef4444">89%</div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:4px">目标 ≥ 95%</div>
+            <div style="margin-top:6px;padding:4px 8px;background:#fef2f2;border-radius:4px;font-size:11px;color:#dc2626">&#9660; 低于目标 6%</div>
+          </div>
+          <div style="padding:16px;background:#fff7ed;border-radius:10px;border:1px solid #fed7aa;text-align:center">
+            <div style="font-size:12px;color:#ea580c;margin-bottom:4px">货损率 PIR</div>
+            <div style="font-size:32px;font-weight:800;color:#f97316">3.8%</div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:4px">目标 ≤ 2.0%</div>
+            <div style="margin-top:6px;padding:4px 8px;background:#fff7ed;border-radius:4px;font-size:11px;color:#ea580c">&#9660; 超出目标 1.8%</div>
+          </div>
+          <div style="padding:16px;background:#f0fdf4;border-radius:10px;border:1px solid #bbf7d0;text-align:center">
+            <div style="font-size:12px;color:#15803d;margin-bottom:4px">单均运费</div>
+            <div style="font-size:32px;font-weight:800;color:#16a34a">¥66.7</div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:4px">目标 ≤ ¥60.0</div>
+            <div style="margin-top:6px;padding:4px 8px;background:#fff7ed;border-radius:4px;font-size:11px;color:#ea580c">&#9660; 超出 ¥6.7</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding:16px;background:#f3e8ff;border-radius:8px;border:1px solid #c4b5fd">
+          <div style="font-size:13px;font-weight:700;color:#7e22ce;margin-bottom:8px">&#128161; Copilot智能分析功能</div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+            Power BI内置Copilot AI功能，可以用自然语言提问获得自动化洞察：<br>
+            <strong>示例提问：</strong>"分析物流数据，找出导致OTDR低于目标的主要原因，并给出改进建议"<br>
+            Copilot会自动分析各维度数据，生成包含根本原因分析和优先行动建议的分析报告，从数据采集到洞察生成全程不需要一行代码。
+          </div>
+        </div>
+      </div>
+
+      <!-- AI复盘 -->
+      <div id="agent-review"></div>
+
+      <!-- 项目自测 -->
+      <div class="learn-section" style="background:#f8fafc">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#9989;</span>项目六自测（+20积分）</div>
+        <div style="display:flex;flex-direction:column;gap:12px" id="quiz-container6">
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">1. 准时送达率OTDR=承诺时间内签收订单数/总订单数×100%，1000单中900单准时，OTDR是多少？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p6q1" value="a"> 9%</label>
+              <label class="quiz-opt"><input type="radio" name="p6q1" value="b"> 90%</label>
+              <label class="quiz-opt"><input type="radio" name="p6q1" value="c"> 100%</label>
+              <label class="quiz-opt"><input type="radio" name="p6q1" value="d"> 111%</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">2. 库存周转率过低意味着什么？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p6q2" value="a"> 商品销售速度太快，容易缺货</label>
+              <label class="quiz-opt"><input type="radio" name="p6q2" value="b"> 库存积压，资金占用增加，发货时效下降风险</label>
+              <label class="quiz-opt"><input type="radio" name="p6q2" value="c"> 物流成本过高</label>
+              <label class="quiz-opt"><input type="radio" name="p6q2" value="d"> 客户满意度下降</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">3. 数据规约的主要目的是什么？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p6q3" value="a"> 删除不准确的数据</label>
+              <label class="quiz-opt"><input type="radio" name="p6q3" value="b"> 在保持分析价值的前提下减少数据量，提高处理效率</label>
+              <label class="quiz-opt"><input type="radio" name="p6q3" value="c"> 将数据格式统一为CSV</label>
+              <label class="quiz-opt"><input type="radio" name="p6q3" value="d"> 对数据进行加密保护</label>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="submitQuiz6()" style="align-self:flex-start;background:#9333ea">提交自测答案</button>
+          <div id="quiz-result6" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo-icon">&#9670;</span><span>数智电商学习平台</span></div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">登录后可使用AI智能体，积分自动同步</p>
+    <button class="btn-coze" onclick="mockCozeLogin()"><span class="coze-icon">C</span>使用 Coze 账号登录</button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录获赠 <strong>100积分</strong> 欢迎礼包</p>
+  </div>
+</div>
+
+<style>
+.quiz-opt { display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;cursor:pointer;transition:all 0.15s; }
+.quiz-opt:hover { border-color:#9333ea;background:#faf5ff; }
+.quiz-q { background:#fff;border-radius:8px;padding:16px;border:1px solid var(--border); }
+</style>
+
+<script src="scripts/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initAgent('agent-guide', 'guide');
+  initAgent('agent-boost', 'boost');
+  initAgent('agent-review', 'review');
+  updateSidebarCredits();
+});
+
+function updateSidebarCredits() {
+  const el = document.getElementById('sidebar-credits');
+  if (el) el.textContent = APP.user ? APP.credits : '--';
+}
+
+function switchTask(num, el) {
+  document.querySelectorAll('.task-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  for (let i = 1; i <= 4; i++) {
+    const c = document.getElementById(`task-content-${i}`);
+    if (c) c.style.display = i === num ? 'block' : 'none';
+  }
+}
+
+function nextTask(num) {
+  if (!APP.user) { openLoginModal(); return; }
+  const items = document.querySelectorAll('.task-item');
+  const prevItem = items[num - 2];
+  if (prevItem) { prevItem.classList.add('done'); prevItem.querySelector('.task-num').textContent = '✓'; }
+  APP.markDone('p6', `t${num - 1}`);
+  if (num <= 4) switchTask(num, items[num - 1]);
+}
+
+function calcOTDR() {
+  const total = parseFloat(document.getElementById('total-orders').value);
+  const ontime = parseFloat(document.getElementById('ontime-orders').value);
+  if (!total || !ontime) return;
+  const otdr = (ontime / total * 100).toFixed(1);
+  document.getElementById('otdr-result').textContent = `OTDR = ${otdr}%`;
+}
+
+function submitQuiz6() {
+  if (!APP.user) { openLoginModal(); return; }
+  const answers = { p6q1: 'b', p6q2: 'b', p6q3: 'b' };
+  let correct = 0;
+  for (const [q, a] of Object.entries(answers)) {
+    const sel = document.querySelector(`input[name="${q}"]:checked`);
+    if (sel && sel.value === a) correct++;
+  }
+  const resultEl = document.getElementById('quiz-result6');
+  resultEl.style.display = 'block';
+  if (correct === 3) {
+    resultEl.innerHTML = '<div style="padding:12px;background:#f0fdf4;border-radius:8px;color:#16a34a;font-size:14px;font-weight:500">&#127881; 全部正确！获得 <strong>+20积分</strong></div>';
+    APP.earnCredits(20, '完成项目六自测');
+    updateSidebarCredits();
+  } else {
+    resultEl.innerHTML = `<div style="padding:12px;background:#faf5ff;border-radius:8px;color:#9333ea;font-size:14px">答对 ${correct}/3 题。建议复习OTDR计算与数据规约概念。</div>`;
+  }
+  APP.logInteraction('project6_quiz', 0);
+}
+</script>
+</body>
+</html>

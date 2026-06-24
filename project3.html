@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目三：营销推广数据分析 — 数智电商学习平台</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="logo-icon">&#9670;</span><span class="logo-text">数智电商学习平台</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="courses.html" class="nav-link active">课程</a>
+      <a href="agents.html" class="nav-link">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right"><div id="user-area-nav"><button class="btn-login" onclick="openLoginModal()">Coze账号登录</button></div></div>
+  </div>
+</nav>
+
+<!-- 项目Hero -->
+<div class="project-hero" style="background:linear-gradient(135deg,#fff7ed 0%,#fed7aa 100%)">
+  <div class="project-hero-inner">
+    <div class="project-breadcrumb"><a href="courses.html">课程</a> / 项目三</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span style="background:#f97316;color:#fff;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0">03</span>
+      <h1 class="project-title" style="margin-bottom:0;font-size:28px">营销推广数据分析</h1>
+    </div>
+    <p class="project-desc">以"焕新家电"迷你破壁机双十一50万投入5渠道200万销售额为场景，掌握CTR/ROI/CVR等推广指标，学会漏斗分析与归因模型，全面提升营销数据分析能力。</p>
+    <div class="project-info">
+      <span class="pi-badge" style="background:#fff7ed;color:#ea580c">4个学习任务</span>
+      <span class="pi-badge" style="background:#f0fdf4;color:#16a34a">3个AI智能体</span>
+      <span class="pi-badge" style="background:#fef2f2;color:#ef4444">中级难度</span>
+    </div>
+  </div>
+</div>
+
+<div class="learn-layout">
+  <!-- 侧边栏 -->
+  <aside class="learn-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">学习任务</div>
+      <ul class="task-list" id="task-list">
+        <li class="task-item active" onclick="switchTask(1,this)">
+          <span class="task-num">1</span>
+          <span>营销推广分析基础认知</span>
+        </li>
+        <li class="task-item" onclick="switchTask(2,this)">
+          <span class="task-num">2</span>
+          <span>多渠道数据集成与处理</span>
+        </li>
+        <li class="task-item" onclick="switchTask(3,this)">
+          <span class="task-num">3</span>
+          <span>推广效果评估与漏斗分析</span>
+        </li>
+        <li class="task-item" onclick="switchTask(4,this)">
+          <span class="task-num">4</span>
+          <span>推广效果可视化呈现</span>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-card" style="margin-top:16px">
+      <div class="sidebar-title">我的积分</div>
+      <div style="padding:14px 16px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#f97316" id="sidebar-credits">--</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">当前可用积分</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="learn-main">
+
+    <!-- AI导学智能体 -->
+    <div id="agent-guide"></div>
+
+    <!-- 任务1 -->
+    <div id="task-content-1">
+      <div class="learn-section">
+        <div class="ls-title">
+          <span class="ls-icon" style="background:#fff7ed;color:#f97316">&#128226;</span>
+          任务3.1 营销推广分析基础认知
+        </div>
+        <div class="ls-body">
+          <h4>&#9670; 案例背景</h4>
+          <p>"焕新家电"品牌迷你破壁机在双十一大促中，投入推广费用50万元，覆盖淘宝直通车、抖音信息流、小红书KOL、微信私域、京东CPC五大渠道，最终实现销售额200万元。如何科学评估这50万投入的效果，找到最优渠道组合？这需要掌握营销推广核心指标体系。</p>
+          <h4>&#9670; 营销推广数据分析的定义</h4>
+          <p>营销推广数据分析是通过收集、处理、分析推广活动的全链路数据（从曝光到最终转化），量化评估各渠道的推广效率与投入产出比，优化资源配置，提升整体营销ROI的科学决策过程。</p>
+        </div>
+      </div>
+
+      <!-- 核心指标卡片 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fff7ed;color:#f97316">&#128202;</span>营销推广核心指标体系</div>
+        <div class="metric-grid">
+          <div class="metric-card" style="border-left:3px solid #f97316">
+            <div class="mc-abbr" style="color:#f97316">CTR</div>
+            <div class="mc-name">点击率</div>
+            <div class="mc-desc">Click-Through Rate = 点击量/展现量×100%。衡量广告吸引力与素材质量的核心指标。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #4f46e5">
+            <div class="mc-abbr" style="color:#4f46e5">ROI</div>
+            <div class="mc-name">投资回报率</div>
+            <div class="mc-desc">Return On Investment = 总利润/推广总费用×100%。衡量推广整体盈利能力的最终指标。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #16a34a">
+            <div class="mc-abbr" style="color:#16a34a">CVR</div>
+            <div class="mc-name">加购/转化率</div>
+            <div class="mc-desc">Conversion Rate = 转化人数/点击人数×100%。衡量落地页承接与商品吸引力。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #0ea5e9">
+            <div class="mc-abbr" style="color:#0ea5e9">UV/PV</div>
+            <div class="mc-name">访客/浏览量</div>
+            <div class="mc-desc">UV：独立访客数；PV：页面浏览量。PV/UV=人均浏览深度，衡量页面黏性。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #db2777">
+            <div class="mc-abbr" style="color:#db2777">RPR</div>
+            <div class="mc-name">复购率</div>
+            <div class="mc-desc">Repurchase Rate = 二次购买客户数/总购买客户数×100%。衡量用户忠诚度与产品满意度。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #9333ea">
+            <div class="mc-abbr" style="color:#9333ea">CAC</div>
+            <div class="mc-name">获客成本</div>
+            <div class="mc-desc">Customer Acquisition Cost = 推广总费用/新增客户数。衡量获取一个新客户的平均成本。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #ea580c">
+            <div class="mc-abbr" style="color:#ea580c">展现量</div>
+            <div class="mc-name">Impression</div>
+            <div class="mc-desc">广告被用户看到的次数，是推广漏斗的起点，衡量渠道覆盖广度。</div>
+          </div>
+          <div class="metric-card" style="border-left:3px solid #0891b2">
+            <div class="mc-abbr" style="color:#0891b2">加购率</div>
+            <div class="mc-name">Add-to-Cart Rate</div>
+            <div class="mc-desc">加购人数/访客人数×100%，衡量商品详情页对用户购买意愿的激发程度。</div>
+          </div>
+        </div>
+
+        <!-- CTR计算器 -->
+        <div style="margin-top:20px;background:#fff7ed;border-radius:8px;padding:16px;border:1px solid #fed7aa">
+          <div style="font-size:13px;font-weight:600;color:#ea580c;margin-bottom:12px">&#128161; 互动练习：计算点击率CTR</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">展现量（次）</div>
+              <input type="number" id="imp-val" value="100000" style="width:120px;padding:6px 10px;border:1px solid #fed7aa;border-radius:6px;font-size:13px">
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">点击量（次）</div>
+              <input type="number" id="click-val" value="3000" style="width:120px;padding:6px 10px;border:1px solid #fed7aa;border-radius:6px;font-size:13px">
+            </div>
+            <button onclick="calcCTR()" style="padding:7px 16px;background:#f97316;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer">计算CTR</button>
+            <div id="ctr-result" style="font-size:18px;font-weight:700;color:#f97316;padding:4px 0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI指测闯关 -->
+      <div id="agent-quiz"></div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(2)" style="background:#f97316">完成任务3.1，进入3.2 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务2 -->
+    <div id="task-content-2" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fff7ed;color:#f97316">&#128203;</span>任务3.2 多渠道数据集成与处理</div>
+        <div class="ls-body">
+          <h4>&#9670; 多渠道数据集成的挑战</h4>
+          <p>"焕新家电"迷你破壁机双十一推广涵盖五大渠道，各渠道数据来源不同、口径不一致，需要在分析前进行标准化整合：</p>
+          <ul>
+            <li><strong>淘宝直通车：</strong>数据来自生意参谋，字段包含展现量、点击量、消耗金额、直接销售额</li>
+            <li><strong>抖音信息流：</strong>数据来自巨量引擎，包含曝光量、点击量、转化量、GMV</li>
+            <li><strong>小红书KOL：</strong>来自品牌后台，包含阅读量、互动量、跳转链接点击、购买转化</li>
+            <li><strong>微信私域：</strong>来自企微数据，包含触达人数、点击率、下单数、GMV</li>
+            <li><strong>京东CPC：</strong>来自京东商智，包含展现量、点击量、花费、成交金额</li>
+          </ul>
+          <h4>&#9670; 数据合规与整合要点</h4>
+          <p><strong>1. 统一时间口径：</strong>各平台统计周期可能不同（自然日/结算日），需明确以哪个时间段为准</p>
+          <p><strong>2. 统一指标口径：</strong>各平台"展现量"定义可能存在差异（曝光1秒/可见曝光等），需建立统一定义</p>
+          <p><strong>3. 去重处理：</strong>同一用户可能在多渠道看到广告，避免重复计算UV</p>
+          <p><strong>4. 数据脱敏：</strong>涉及用户ID的数据需依据《个人信息保护法》进行匿名化处理</p>
+        </div>
+        <div style="background:#fef2f2;border-radius:8px;padding:14px;margin-top:12px;border-left:3px solid #ef4444;font-size:13px">
+          <strong>&#9888; 数守底线：</strong>不得将用户行为数据出售或共享给第三方，多渠道数据整合须在自有平台进行，违者依据《数据安全法》最高可处200万元罚款。
+        </div>
+      </div>
+
+      <!-- 渠道数据对比表 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fff7ed;color:#f97316">&#128200;</span>五大渠道数据整合示例</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <thead>
+              <tr style="background:#fff7ed">
+                <th style="padding:10px 8px;text-align:left;border:1px solid #fed7aa">渠道</th>
+                <th style="padding:10px 8px;text-align:center;border:1px solid #fed7aa">投入费用(万)</th>
+                <th style="padding:10px 8px;text-align:center;border:1px solid #fed7aa">展现量</th>
+                <th style="padding:10px 8px;text-align:center;border:1px solid #fed7aa">点击量</th>
+                <th style="padding:10px 8px;text-align:center;border:1px solid #fed7aa">CTR</th>
+                <th style="padding:10px 8px;text-align:center;border:1px solid #fed7aa">销售额(万)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:8px;border:1px solid #e2e8f0">淘宝直通车</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">18</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">450万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">13.5万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#f97316;font-weight:600">3.0%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">72</td></tr>
+              <tr style="background:#f8fafc"><td style="padding:8px;border:1px solid #e2e8f0">抖音信息流</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">15</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">600万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">12万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#f97316;font-weight:600">2.0%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">60</td></tr>
+              <tr><td style="padding:8px;border:1px solid #e2e8f0">小红书KOL</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">8</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">80万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">4.8万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">6.0%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">36</td></tr>
+              <tr style="background:#f8fafc"><td style="padding:8px;border:1px solid #e2e8f0">微信私域</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">5</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">20万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">3万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">15.0%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">22</td></tr>
+              <tr><td style="padding:8px;border:1px solid #e2e8f0">京东CPC</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">4</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">120万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0">2.4万</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#f97316;font-weight:600">2.0%</td><td style="padding:8px;text-align:center;border:1px solid #e2e8f0;color:#16a34a;font-weight:600">10</td></tr>
+              <tr style="background:#fff7ed;font-weight:600"><td style="padding:8px;border:1px solid #fed7aa">合计</td><td style="padding:8px;text-align:center;border:1px solid #fed7aa;color:#f97316">50</td><td style="padding:8px;text-align:center;border:1px solid #fed7aa">1270万</td><td style="padding:8px;text-align:center;border:1px solid #fed7aa">35.7万</td><td style="padding:8px;text-align:center;border:1px solid #fed7aa">2.81%</td><td style="padding:8px;text-align:center;border:1px solid #fed7aa;color:#16a34a">200</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(3)" style="background:#f97316">完成任务3.2，进入3.3 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务3 -->
+    <div id="task-content-3" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fff7ed;color:#f97316">&#128270;</span>任务3.3 推广效果评估与漏斗分析</div>
+        <div class="ls-body">
+          <h4>&#9670; 营销漏斗模型</h4>
+          <p>营销漏斗描述了消费者从第一次接触广告到最终完成购买的全过程，每个环节都有用户流失，通过量化每层流失率来找到推广的最大短板：</p>
+        </div>
+
+        <!-- 漏斗图 -->
+        <div style="margin:16px 0">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="width:90%;background:#f97316;color:#fff;text-align:center;padding:14px;border-radius:8px;font-size:14px;font-weight:600">
+              曝光/展现量：1270万次
+            </div>
+            <div style="font-size:12px;color:#f97316;font-weight:500">&#9660; CTR 2.81% &#9660;</div>
+            <div style="width:72%;background:#fb923c;color:#fff;text-align:center;padding:12px;border-radius:8px;font-size:14px;font-weight:600">
+              点击量：35.7万次
+            </div>
+            <div style="font-size:12px;color:#fb923c;font-weight:500">&#9660; 访客转化率 45% &#9660;</div>
+            <div style="width:55%;background:#fdba74;color:#fff;text-align:center;padding:12px;border-radius:8px;font-size:14px;font-weight:600">
+              访问商品页：16.1万人
+            </div>
+            <div style="font-size:12px;color:#fdba74;font-weight:500">&#9660; 加购率 22% &#9660;</div>
+            <div style="width:38%;background:#fed7aa;color:#92400e;text-align:center;padding:12px;border-radius:8px;font-size:14px;font-weight:600">
+              加购人数：3.5万人
+            </div>
+            <div style="font-size:12px;color:#d97706;font-weight:500">&#9660; 下单转化率 38% &#9660;</div>
+            <div style="width:24%;background:#fef3c7;color:#92400e;text-align:center;padding:12px;border-radius:8px;font-size:14px;font-weight:600">
+              成交订单：1.34万单
+            </div>
+          </div>
+        </div>
+
+        <div class="ls-body">
+          <h4>&#9670; 渠道ROI对比分析</h4>
+          <p>ROI = 销售额/投入费用（或利润/费用×100%），用于横向对比各渠道效益：</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:80px;font-size:12px;color:var(--text-secondary)">微信私域</div>
+            <div style="flex:1;background:#e5e7eb;border-radius:4px;height:24px;position:relative">
+              <div style="background:#16a34a;width:88%;height:100%;border-radius:4px"></div>
+              <span style="position:absolute;right:8px;top:4px;font-size:12px;font-weight:600;color:#14532d">ROI 4.4</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:80px;font-size:12px;color:var(--text-secondary)">小红书KOL</div>
+            <div style="flex:1;background:#e5e7eb;border-radius:4px;height:24px;position:relative">
+              <div style="background:#f97316;width:75%;height:100%;border-radius:4px"></div>
+              <span style="position:absolute;right:8px;top:4px;font-size:12px;font-weight:600;color:#7c2d12">ROI 4.5</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:80px;font-size:12px;color:var(--text-secondary)">淘宝直通车</div>
+            <div style="flex:1;background:#e5e7eb;border-radius:4px;height:24px;position:relative">
+              <div style="background:#0ea5e9;width:60%;height:100%;border-radius:4px"></div>
+              <span style="position:absolute;right:8px;top:4px;font-size:12px;font-weight:600;color:#0c4a6e">ROI 4.0</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:80px;font-size:12px;color:var(--text-secondary)">抖音信息流</div>
+            <div style="flex:1;background:#e5e7eb;border-radius:4px;height:24px;position:relative">
+              <div style="background:#4f46e5;width:48%;height:100%;border-radius:4px"></div>
+              <span style="position:absolute;right:8px;top:4px;font-size:12px;font-weight:600;color:#312e81">ROI 4.0</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:80px;font-size:12px;color:var(--text-secondary)">京东CPC</div>
+            <div style="flex:1;background:#e5e7eb;border-radius:4px;height:24px;position:relative">
+              <div style="background:#db2777;width:38%;height:100%;border-radius:4px"></div>
+              <span style="position:absolute;right:8px;top:4px;font-size:12px;font-weight:600;color:#831843">ROI 2.5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(4)" style="background:#f97316">完成任务3.3，进入3.4 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务4 -->
+    <div id="task-content-4" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fff7ed;color:#f97316">&#128196;</span>任务3.4 推广效果可视化呈现</div>
+        <div class="ls-body">
+          <h4>&#9670; 图表类型选择原则</h4>
+          <p>不同的数据关系应选择不同的图表类型，"图表选错，表达失效"是新手最常见的错误：</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div style="padding:16px;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa">
+            <div style="font-size:13px;font-weight:600;color:#ea580c;margin-bottom:8px">&#128200; 折线图</div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6">
+              <strong>适用场景：</strong>时间序列趋势分析<br>
+              <strong>推广应用：</strong>每日CTR变化趋势、ROI随活动进程的走势<br>
+              <strong>注意：</strong>X轴应为连续时间，至少5个时间点
+            </div>
+          </div>
+          <div style="padding:16px;background:#e0f2fe;border-radius:8px;border:1px solid #bae6fd">
+            <div style="font-size:13px;font-weight:600;color:#0369a1;margin-bottom:8px">&#128202; 条形图/柱状图</div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6">
+              <strong>适用场景：</strong>类目间的比较<br>
+              <strong>推广应用：</strong>5渠道ROI对比、各渠道投入费用分布<br>
+              <strong>注意：</strong>类目不超过8个，数值轴从0开始
+            </div>
+          </div>
+          <div style="padding:16px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0">
+            <div style="font-size:13px;font-weight:600;color:#15803d;margin-bottom:8px">&#9651; 漏斗图</div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6">
+              <strong>适用场景：</strong>流程转化率分析<br>
+              <strong>推广应用：</strong>曝光→点击→加购→下单→复购全漏斗<br>
+              <strong>注意：</strong>层级要按流程顺序，标注各层转化率
+            </div>
+          </div>
+          <div style="padding:16px;background:#fdf4ff;border-radius:8px;border:1px solid #e9d5ff">
+            <div style="font-size:13px;font-weight:600;color:#7e22ce;margin-bottom:8px">&#11044; 饼图/环形图</div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6">
+              <strong>适用场景：</strong>构成比例展示<br>
+              <strong>推广应用：</strong>各渠道预算分配占比<br>
+              <strong>注意：</strong>类目不超过6个，避免用于趋势对比
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding:14px;background:#f8fafc;border-radius:8px;border-left:3px solid #f97316;font-size:13px">
+          <strong>&#128161; 可视化核心原则：</strong>图表服务于结论，先有分析结论，再选图表呈现。不要让读者猜结论，标题直接写出洞察，例如"微信私域渠道ROI最高达4.4，建议下一阶段加大投入"。
+        </div>
+      </div>
+
+      <!-- AI加速 -->
+      <div id="agent-boost"></div>
+
+      <!-- 项目自测 -->
+      <div class="learn-section" style="background:#f8fafc">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#9989;</span>项目三自测（+20积分）</div>
+        <div style="display:flex;flex-direction:column;gap:12px" id="quiz-container3">
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">1. CTR=点击量/展现量×100%，若展现量100000次，点击量3000次，CTR是多少？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p3q1" value="a"> 0.3%</label>
+              <label class="quiz-opt"><input type="radio" name="p3q1" value="b"> 3%</label>
+              <label class="quiz-opt"><input type="radio" name="p3q1" value="c"> 30%</label>
+              <label class="quiz-opt"><input type="radio" name="p3q1" value="d"> 300%</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">2. ROI=（总利润/推广总费用）×100%，投入5万元，实现利润8万元，ROI是多少？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p3q2" value="a"> 60%</label>
+              <label class="quiz-opt"><input type="radio" name="p3q2" value="b"> 62.5%</label>
+              <label class="quiz-opt"><input type="radio" name="p3q2" value="c"> 160%</label>
+              <label class="quiz-opt"><input type="radio" name="p3q2" value="d"> 260%</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">3. 分析"各渠道随时间变化的CTR趋势"最适合选用哪种图表？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p3q3" value="a"> 饼图</label>
+              <label class="quiz-opt"><input type="radio" name="p3q3" value="b"> 漏斗图</label>
+              <label class="quiz-opt"><input type="radio" name="p3q3" value="c"> 折线图</label>
+              <label class="quiz-opt"><input type="radio" name="p3q3" value="d"> 散点图</label>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="submitQuiz3()" style="align-self:flex-start;background:#f97316">提交自测答案</button>
+          <div id="quiz-result3" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo-icon">&#9670;</span><span>数智电商学习平台</span></div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">登录后可使用AI智能体，积分自动同步</p>
+    <button class="btn-coze" onclick="mockCozeLogin()"><span class="coze-icon">C</span>使用 Coze 账号登录</button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录获赠 <strong>100积分</strong> 欢迎礼包</p>
+  </div>
+</div>
+
+<style>
+.quiz-opt { display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;cursor:pointer;transition:all 0.15s; }
+.quiz-opt:hover { border-color:#f97316;background:#fff7ed; }
+.quiz-q { background:#fff;border-radius:8px;padding:16px;border:1px solid var(--border); }
+</style>
+
+<script src="scripts/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initAgent('agent-guide', 'guide');
+  initAgent('agent-quiz', 'quiz');
+  initAgent('agent-boost', 'boost');
+  updateSidebarCredits();
+});
+
+function updateSidebarCredits() {
+  const el = document.getElementById('sidebar-credits');
+  if (el) el.textContent = APP.user ? APP.credits : '--';
+}
+
+function switchTask(num, el) {
+  document.querySelectorAll('.task-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  for (let i = 1; i <= 4; i++) {
+    const c = document.getElementById(`task-content-${i}`);
+    if (c) c.style.display = i === num ? 'block' : 'none';
+  }
+}
+
+function nextTask(num) {
+  if (!APP.user) { openLoginModal(); return; }
+  const items = document.querySelectorAll('.task-item');
+  const prevItem = items[num - 2];
+  if (prevItem) { prevItem.classList.add('done'); prevItem.querySelector('.task-num').textContent = '✓'; }
+  APP.markDone('p3', `t${num - 1}`);
+  if (num <= 4) switchTask(num, items[num - 1]);
+}
+
+function calcCTR() {
+  const imp = parseFloat(document.getElementById('imp-val').value);
+  const clk = parseFloat(document.getElementById('click-val').value);
+  if (!imp || !clk) return;
+  const ctr = (clk / imp * 100).toFixed(2);
+  document.getElementById('ctr-result').textContent = `CTR = ${ctr}%`;
+}
+
+function submitQuiz3() {
+  if (!APP.user) { openLoginModal(); return; }
+  const answers = { p3q1: 'b', p3q2: 'c', p3q3: 'c' };
+  let correct = 0;
+  for (const [q, a] of Object.entries(answers)) {
+    const sel = document.querySelector(`input[name="${q}"]:checked`);
+    if (sel && sel.value === a) correct++;
+  }
+  const resultEl = document.getElementById('quiz-result3');
+  resultEl.style.display = 'block';
+  if (correct === 3) {
+    resultEl.innerHTML = '<div style="padding:12px;background:#f0fdf4;border-radius:8px;color:#16a34a;font-size:14px;font-weight:500">&#127881; 全部正确！获得 <strong>+20积分</strong></div>';
+    APP.earnCredits(20, '完成项目三自测');
+    updateSidebarCredits();
+  } else {
+    resultEl.innerHTML = `<div style="padding:12px;background:#fff7ed;border-radius:8px;color:#f97316;font-size:14px">答对 ${correct}/3 题。建议复习CTR/ROI计算公式。</div>`;
+  }
+  APP.logInteraction('project3_quiz', 0);
+}
+</script>
+</body>
+</html>

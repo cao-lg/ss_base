@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目五：客户服务数据分析 — 数智电商学习平台</title>
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="logo-icon">&#9670;</span><span class="logo-text">数智电商学习平台</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="courses.html" class="nav-link active">课程</a>
+      <a href="agents.html" class="nav-link">AI智能体</a>
+      <a href="dashboard.html" class="nav-link">学习画像</a>
+    </div>
+    <div class="nav-right"><div id="user-area-nav"><button class="btn-login" onclick="openLoginModal()">Coze账号登录</button></div></div>
+  </div>
+</nav>
+
+<!-- 项目Hero -->
+<div class="project-hero" style="background:linear-gradient(135deg,#fdf2f8 0%,#fce7f3 100%)">
+  <div class="project-hero-inner">
+    <div class="project-breadcrumb"><a href="courses.html">课程</a> / 项目五</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span style="background:#db2777;color:#fff;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0">05</span>
+      <h1 class="project-title" style="margin-bottom:0;font-size:28px">客户服务数据分析</h1>
+    </div>
+    <p class="project-desc">以"焕新家电"首解率58%、满意度3.6分的客服数据为场景，掌握服务效率/质量/客户价值三层指标体系，学会CSAT/NPS/FCR联合分析，借助飞书多维表格实现AI智能客户关系管理。</p>
+    <div class="project-info">
+      <span class="pi-badge" style="background:#fdf2f8;color:#be185d">5个学习任务</span>
+      <span class="pi-badge" style="background:#f0fdf4;color:#16a34a">3个AI智能体</span>
+      <span class="pi-badge" style="background:#fff7ed;color:#f97316">中高难度</span>
+    </div>
+  </div>
+</div>
+
+<div class="learn-layout">
+  <!-- 侧边栏 -->
+  <aside class="learn-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">学习任务</div>
+      <ul class="task-list" id="task-list">
+        <li class="task-item active" onclick="switchTask(1,this)">
+          <span class="task-num">1</span>
+          <span>客户服务分析基本认知</span>
+        </li>
+        <li class="task-item" onclick="switchTask(2,this)">
+          <span class="task-num">2</span>
+          <span>异常数据清洗</span>
+        </li>
+        <li class="task-item" onclick="switchTask(3,this)">
+          <span class="task-num">3</span>
+          <span>客户满意度分析</span>
+        </li>
+        <li class="task-item" onclick="switchTask(4,this)">
+          <span class="task-num">4</span>
+          <span>客户服务策略优化</span>
+        </li>
+        <li class="task-item" onclick="switchTask(5,this)">
+          <span class="task-num">5</span>
+          <span>飞书多维表格AI管理客户关系</span>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-card" style="margin-top:16px">
+      <div class="sidebar-title">我的积分</div>
+      <div style="padding:14px 16px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#db2777" id="sidebar-credits">--</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">当前可用积分</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="learn-main">
+
+    <!-- AI导学智能体 -->
+    <div id="agent-guide"></div>
+
+    <!-- 任务1 -->
+    <div id="task-content-1">
+      <div class="learn-section">
+        <div class="ls-title">
+          <span class="ls-icon" style="background:#fdf2f8;color:#db2777">&#128101;</span>
+          任务5.1 客户服务数据分析基本认知
+        </div>
+        <div class="ls-body">
+          <h4>&#9670; 案例背景</h4>
+          <p>"焕新家电"客服中心当前数据：日均处理工单1200件，首次解决率（FCR）仅58%（行业标准70%），客户满意度4.2分中仅3.6分，平均响应时长3.8分钟（行业标准2分钟内）。这些数据表明，客服质量已成为影响用户体验与复购率的关键短板。</p>
+          <h4>&#9670; 客户服务数据分析的价值</h4>
+          <p>通过系统分析客服数据，可以识别服务瓶颈、优化坐席排班、降低重复工单、提升客户满意度，最终减少因服务不佳导致的客户流失（研究表明，客服体验差导致的客户流失率是价格因素的1.6倍）。</p>
+        </div>
+      </div>
+
+      <!-- 三层指标架构 -->
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fdf2f8;color:#db2777">&#128202;</span>客户服务三层指标体系</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+          <!-- 规模层 -->
+          <div style="padding:16px;background:#fdf2f8;border-radius:8px;border-left:4px solid #db2777">
+            <div style="font-size:13px;font-weight:700;color:#be185d;margin-bottom:10px">第一层：服务规模层指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(4,1fr);gap:8px">
+              <div class="metric-card" style="border-left:3px solid #db2777;padding:10px">
+                <div class="mc-abbr" style="color:#db2777;font-size:12px">工单量</div>
+                <div class="mc-name" style="font-size:11px">单位时间总工单数</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #f472b6;padding:10px">
+                <div class="mc-abbr" style="color:#be185d;font-size:12px">坐席数</div>
+                <div class="mc-name" style="font-size:11px">在线客服人数</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #fbcfe8;padding:10px">
+                <div class="mc-abbr" style="color:#be185d;font-size:12px">人均工单</div>
+                <div class="mc-name" style="font-size:11px">工单量/坐席数</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #ec4899;padding:10px">
+                <div class="mc-abbr" style="color:#be185d;font-size:12px">渠道分布</div>
+                <div class="mc-name" style="font-size:11px">各渠道工单占比</div>
+              </div>
+            </div>
+          </div>
+          <!-- 效率层 -->
+          <div style="padding:16px;background:#eff6ff;border-radius:8px;border-left:4px solid #3b82f6">
+            <div style="font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:10px">第二层：服务效率层指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(4,1fr);gap:8px">
+              <div class="metric-card" style="border-left:3px solid #3b82f6;padding:10px">
+                <div class="mc-abbr" style="color:#3b82f6;font-size:12px">FCR</div>
+                <div class="mc-name" style="font-size:11px">首次解决率</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #60a5fa;padding:10px">
+                <div class="mc-abbr" style="color:#1d4ed8;font-size:12px">AHT</div>
+                <div class="mc-name" style="font-size:11px">平均处理时长</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #93c5fd;padding:10px">
+                <div class="mc-abbr" style="color:#1d4ed8;font-size:12px">ASA</div>
+                <div class="mc-name" style="font-size:11px">平均应答速度</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #bfdbfe;padding:10px">
+                <div class="mc-abbr" style="color:#1d4ed8;font-size:12px">放弃率</div>
+                <div class="mc-name" style="font-size:11px">超时未接通比率</div>
+              </div>
+            </div>
+          </div>
+          <!-- 质量层 -->
+          <div style="padding:16px;background:#f0fdf4;border-radius:8px;border-left:4px solid #16a34a">
+            <div style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:10px">第三层：服务质量层指标</div>
+            <div class="metric-grid" style="grid-template-columns:repeat(4,1fr);gap:8px">
+              <div class="metric-card" style="border-left:3px solid #16a34a;padding:10px">
+                <div class="mc-abbr" style="color:#16a34a;font-size:12px">CSAT</div>
+                <div class="mc-name" style="font-size:11px">客户满意度评分</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #22c55e;padding:10px">
+                <div class="mc-abbr" style="color:#15803d;font-size:12px">NPS</div>
+                <div class="mc-name" style="font-size:11px">净推荐值</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #4ade80;padding:10px">
+                <div class="mc-abbr" style="color:#15803d;font-size:12px">投诉率</div>
+                <div class="mc-name" style="font-size:11px">投诉工单/总工单</div>
+              </div>
+              <div class="metric-card" style="border-left:3px solid #86efac;padding:10px">
+                <div class="mc-abbr" style="color:#15803d;font-size:12px">重开率</div>
+                <div class="mc-name" style="font-size:11px">24h内重开工单占比</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI指测闯关 -->
+      <div id="agent-quiz"></div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(2)" style="background:#db2777">完成任务5.1，进入5.2 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务2 -->
+    <div id="task-content-2" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fdf2f8;color:#db2777">&#128269;</span>任务5.2 异常数据清洗</div>
+        <div class="ls-body">
+          <h4>&#9670; 客服数据中的典型异常</h4>
+          <p>客服数据因人工录入、系统对接等原因，存在多类异常，需在分析前完成清洗，否则会导致指标计算严重失真：</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-top:12px">
+          <div style="padding:16px;background:#fef2f2;border-radius:8px;border:1px solid #fca5a5">
+            <div style="font-size:13px;font-weight:700;color:#dc2626;margin-bottom:8px">&#9940; 异常类型一：负数/超范围评分</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>表现：</strong>满意度评分（1-5分制）出现 -1分、0分 或 6分 等超出范围的数值<br>
+              <strong>原因：</strong>系统Bug（字段未做范围校验）、用户恶意填写、数据迁移映射错误<br>
+              <strong>处理：</strong>筛选 score &lt; 1 OR score &gt; 5 的记录标记为无效，分析时排除；大批量异常时优先修复数据采集端的校验逻辑
+            </div>
+          </div>
+          <div style="padding:16px;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa">
+            <div style="font-size:13px;font-weight:700;color:#ea580c;margin-bottom:8px">&#9940; 异常类型二：超时数据处理</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>表现：</strong>AHT（平均处理时长）出现极端值，如某条工单处理时长为 4320分钟（72小时）<br>
+              <strong>原因：</strong>坐席下班前忘记关闭工单计时、系统未设置自动超时关闭机制<br>
+              <strong>处理：</strong>确定合理上限（如单工单&lt;480分钟=8小时），超出的替换为当日该类型工单的中位数处理时长
+            </div>
+          </div>
+          <div style="padding:16px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0">
+            <div style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:8px">&#10004; 数据清洗最佳实践</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              1. <strong>记录清洗日志：</strong>每次清洗操作都要记录"清洗原因-处理方式-影响记录数"<br>
+              2. <strong>保留原始数据：</strong>清洗后的数据另存新表，原始数据不删除<br>
+              3. <strong>双人复核：</strong>关键指标的清洗规则需与业务方确认后再执行
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(3)" style="background:#db2777">完成任务5.2，进入5.3 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务3 -->
+    <div id="task-content-3" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fdf2f8;color:#db2777">&#128200;</span>任务5.3 客户满意度分析</div>
+        <div class="ls-body">
+          <h4>&#9670; 三大满意度指标详解</h4>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px">
+          <!-- CSAT -->
+          <div style="padding:18px;background:#fdf2f8;border-radius:10px;border:1px solid #fbcfe8">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <div style="font-size:16px;font-weight:700;color:#db2777">CSAT — 客户满意度评分</div>
+              <div style="background:#db2777;color:#fff;padding:4px 12px;border-radius:20px;font-size:12px">当前3.6 / 5.0</div>
+            </div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>计算方式：</strong>CSAT = 满意回应数（4-5分）/ 总有效回应数 × 100%<br>
+              <strong>行业基准：</strong>优秀 ≥ 85% | 良好 70%-85% | 待改进 &lt; 70%<br>
+              <strong>分析维度：</strong>按坐席/按渠道/按问题类型/按时段交叉分析，定位低满意度集中点<br>
+              <strong>"焕新家电"现状：</strong>3.6/5.0对应约72%满意率，处于"良好"区间下限，退款/换货类工单CSAT最低（2.8分）
+            </div>
+          </div>
+          <!-- NPS -->
+          <div style="padding:18px;background:#eff6ff;border-radius:10px;border:1px solid #bfdbfe">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <div style="font-size:16px;font-weight:700;color:#1d4ed8">NPS — 净推荐值</div>
+              <div style="background:#1d4ed8;color:#fff;padding:4px 12px;border-radius:20px;font-size:12px">行业参考</div>
+            </div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>计算方式：</strong>NPS = 推荐者占比（9-10分）- 批评者占比（0-6分）<br>
+              <strong>分数解读：</strong>NPS&gt;70=极好 | 50-70=良好 | 0-50=一般 | &lt;0=警惕<br>
+              <strong>NPS三类客户：</strong>推荐者（9-10分）主动传播品牌；中立者（7-8分）满意但不主动推荐；批评者（0-6分）可能负面传播
+            </div>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <div style="flex:1;padding:10px;background:#dcfce7;border-radius:6px;text-align:center;font-size:12px">
+                <div style="font-weight:700;color:#15803d;font-size:16px">推荐者</div>
+                <div style="color:#15803d">9-10分</div>
+              </div>
+              <div style="flex:1;padding:10px;background:#fef9c3;border-radius:6px;text-align:center;font-size:12px">
+                <div style="font-weight:700;color:#854d0e;font-size:16px">中立者</div>
+                <div style="color:#854d0e">7-8分</div>
+              </div>
+              <div style="flex:1;padding:10px;background:#fef2f2;border-radius:6px;text-align:center;font-size:12px">
+                <div style="font-weight:700;color:#dc2626;font-size:16px">批评者</div>
+                <div style="color:#dc2626">0-6分</div>
+              </div>
+            </div>
+          </div>
+          <!-- FCR -->
+          <div style="padding:18px;background:#f0fdf4;border-radius:10px;border:1px solid #bbf7d0">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <div style="font-size:16px;font-weight:700;color:#15803d">FCR — 首次解决率</div>
+              <div style="background:#dc2626;color:#fff;padding:4px 12px;border-radius:20px;font-size:12px">当前58% 低于标准</div>
+            </div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>计算方式：</strong>FCR = 首次解决的问题数 / 总问题数 × 100%<br>
+              <strong>行业标准：</strong>≥ 70%<br>
+              <strong>与满意度关系：</strong>研究表明，FCR每提升1%，CSAT平均提升约1%；FCR是驱动CSAT最强的单一指标<br>
+              <strong>提升路径：</strong>培训坐席产品知识 → 完善知识库 → 减少不必要的工单转接
+            </div>
+          </div>
+        </div>
+
+        <!-- FCR计算器 -->
+        <div style="margin-top:16px;background:#fdf2f8;border-radius:8px;padding:16px;border:1px solid #fbcfe8">
+          <div style="font-size:13px;font-weight:600;color:#be185d;margin-bottom:12px">&#128161; 互动练习：计算首次解决率FCR</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">总问题数（件）</div>
+              <input type="number" id="total-tickets" value="1000" style="width:120px;padding:6px 10px;border:1px solid #fbcfe8;border-radius:6px;font-size:13px">
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">首次解决数（件）</div>
+              <input type="number" id="resolved-tickets" value="580" style="width:120px;padding:6px 10px;border:1px solid #fbcfe8;border-radius:6px;font-size:13px">
+            </div>
+            <button onclick="calcFCR()" style="padding:7px 16px;background:#db2777;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer">计算FCR</button>
+            <div id="fcr-result" style="font-size:18px;font-weight:700;color:#db2777;padding:4px 0"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(4)" style="background:#db2777">完成任务5.3，进入5.4 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务4 -->
+    <div id="task-content-4" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fdf2f8;color:#db2777">&#128161;</span>任务5.4 客户服务策略优化</div>
+        <div class="ls-body">
+          <h4>&#9670; 基于数据的三大优化方向</h4>
+          <p>数据分析的终极目的是指导决策与行动。针对"焕新家电"的服务数据，提出以下三个优先优化方向：</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-top:12px">
+          <div style="padding:18px;background:#f8fafc;border-radius:8px;border-left:4px solid #db2777">
+            <div style="font-weight:700;color:#db2777;margin-bottom:8px;font-size:14px">&#128101; 优化方向一：坐席排班智能化</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>问题：</strong>工单高峰期（20:00-23:00）放弃率达15%，远超5%行业标准<br>
+              <strong>数据支撑：</strong>按小时分析工单量分布，识别高峰时段与低谷时段<br>
+              <strong>解决方案：</strong>将闲时坐席弹性切换到高峰时段；引入AI自动回复处理常见问题（FAQ自动化）；设定工单量预警阈值，触发加班机制<br>
+              <strong>预期效果：</strong>放弃率降至8%以内，CSAT提升0.3分
+            </div>
+          </div>
+          <div style="padding:18px;background:#f8fafc;border-radius:8px;border-left:4px solid #3b82f6">
+            <div style="font-weight:700;color:#1d4ed8;margin-bottom:8px;font-size:14px">&#128218; 优化方向二：培训重点精准化</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>问题：</strong>退款/换货类工单FCR仅42%，且该类工单占总量的35%<br>
+              <strong>数据支撑：</strong>按问题类型交叉分析FCR与CSAT，定位最差问题类型<br>
+              <strong>解决方案：</strong>针对退换货流程建立标准化话术与处理SOP；月度培训聚焦低FCR问题类型的坐席提升<br>
+              <strong>预期效果：</strong>FCR从58%提升至68%，退款类CSAT从2.8提升至3.5
+            </div>
+          </div>
+          <div style="padding:18px;background:#f8fafc;border-radius:8px;border-left:4px solid #16a34a">
+            <div style="font-weight:700;color:#15803d;margin-bottom:8px;font-size:14px">&#128242; 优化方向三：渠道分流智能化</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+              <strong>问题：</strong>47%的工单为简单查询（物流状态/订单信息），占用大量人工坐席资源<br>
+              <strong>数据支撑：</strong>分析工单类型分布，识别可自动化处理的比例<br>
+              <strong>解决方案：</strong>接入智能客服机器人处理简单查询；设计清晰的人工转接路由（复杂问题快速到达专业坐席）<br>
+              <strong>预期效果：</strong>人均处理工单提升40%，人工成本降低20%
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;padding:16px 0">
+        <button class="btn-primary" onclick="nextTask(5)" style="background:#db2777">完成任务5.4，进入5.5 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 任务5 -->
+    <div id="task-content-5" style="display:none">
+      <div class="learn-section">
+        <div class="ls-title"><span class="ls-icon" style="background:#fdf2f8;color:#db2777">&#128209;</span>任务5.5 飞书多维表格AI管理客户关系</div>
+        <div class="ls-body">
+          <h4>&#9670; 飞书多维表格简介</h4>
+          <p>飞书多维表格（Feishu Base）是字节跳动推出的一款集表格、数据库、自动化流程于一体的协同工具，内置AI能力，特别适合中小团队管理客户关系、客服工单、售后跟踪等场景。</p>
+          <h4>&#9670; 搭建客户关系管理系统的步骤</h4>
+          <ol style="margin-left:20px;line-height:2">
+            <li><strong>创建客户信息表：</strong>字段包含客户ID、姓名、联系方式、购买记录、历史工单、客户等级（RFM分层结果）</li>
+            <li><strong>创建工单跟踪表：</strong>关联客户信息，记录工单状态、处理人、处理时长、满意度评分</li>
+            <li><strong>配置AI字段：</strong>对客户评价文本使用飞书AI自动提取情感倾向（正面/中立/负面）</li>
+            <li><strong>设置自动化流程：</strong>满意度低于3分时自动触发回访任务；VIP客户工单超过30分钟未响应时自动升级</li>
+            <li><strong>仪表板可视化：</strong>创建CSAT趋势图、坐席绩效排行、工单类型分布饼图</li>
+          </ol>
+          <h4>&#9670; AI辅助分析演示</h4>
+          <p>在飞书多维表格中，可以直接用自然语言向AI提问："分析本月工单数据，找出CSAT最低的问题类型和对应坐席，并给出改进建议"。AI会自动生成分析报告，大幅提升分析效率。</p>
+        </div>
+        <div style="margin-top:12px;padding:14px;background:#f0fdf4;border-radius:8px;border-left:3px solid #16a34a;font-size:13px">
+          <strong>&#128161; 实操提示：</strong>飞书多维表格支持从CSV导入历史工单数据，搭建完成后可通过飞书机器人将每日CSAT报告自动推送到客服团队群，实现数据驱动的日常管理闭环。
+        </div>
+      </div>
+
+      <!-- AI加速 -->
+      <div id="agent-boost"></div>
+
+      <!-- 项目自测 -->
+      <div class="learn-section" style="background:#f8fafc">
+        <div class="ls-title"><span class="ls-icon" style="background:#f0fdf4;color:#16a34a">&#9989;</span>项目五自测（+20积分）</div>
+        <div style="display:flex;flex-direction:column;gap:12px" id="quiz-container5">
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">1. FCR（首次解决率）的计算公式是？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p5q1" value="a"> 已解决工单数 / 总工单数 × 100%</label>
+              <label class="quiz-opt"><input type="radio" name="p5q1" value="b"> 首次解决的问题数 / 总问题数 × 100%</label>
+              <label class="quiz-opt"><input type="radio" name="p5q1" value="c"> 满意评价数 / 总评价数 × 100%</label>
+              <label class="quiz-opt"><input type="radio" name="p5q1" value="d"> 人工解决数 / 机器人解决数 × 100%</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">2. NPS净推荐值 &gt; 70分表示什么？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p5q2" value="a"> 客户满意度需要改进</label>
+              <label class="quiz-opt"><input type="radio" name="p5q2" value="b"> 一般水平，需维持</label>
+              <label class="quiz-opt"><input type="radio" name="p5q2" value="c"> 极好的口碑传播能力</label>
+              <label class="quiz-opt"><input type="radio" name="p5q2" value="d"> 客户对产品价格满意</label>
+            </div>
+          </div>
+          <div class="quiz-q">
+            <p style="font-size:14px;font-weight:500;margin-bottom:10px">3. 客服数据中发现满意度评分为6分（满分5分），属于哪类数据问题？</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label class="quiz-opt"><input type="radio" name="p5q3" value="a"> 缺失值问题</label>
+              <label class="quiz-opt"><input type="radio" name="p5q3" value="b"> 异常值/超范围错误</label>
+              <label class="quiz-opt"><input type="radio" name="p5q3" value="c"> 重复数据问题</label>
+              <label class="quiz-opt"><input type="radio" name="p5q3" value="d"> 格式错误问题</label>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="submitQuiz5()" style="align-self:flex-start;background:#db2777">提交自测答案</button>
+          <div id="quiz-result5" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="logo-icon">&#9670;</span><span>数智电商学习平台</span></div>
+    <div class="footer-note">本平台通过Coze OAuth接入学生账号</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLoginModal()">&#10005;</button>
+    <div class="modal-logo"><span class="logo-icon">&#9670;</span></div>
+    <h2 class="modal-title">Coze账号登录</h2>
+    <p class="modal-desc">登录后可使用AI智能体，积分自动同步</p>
+    <button class="btn-coze" onclick="mockCozeLogin()"><span class="coze-icon">C</span>使用 Coze 账号登录</button>
+    <div class="modal-divider">或</div>
+    <div class="mock-login">
+      <input type="text" id="mock-username" placeholder="学号 / 邮箱" class="mock-input">
+      <input type="password" id="mock-password" placeholder="密码" class="mock-input">
+      <button class="btn-primary full" onclick="mockDirectLogin()">登录</button>
+    </div>
+    <p class="modal-tip">首次登录获赠 <strong>100积分</strong> 欢迎礼包</p>
+  </div>
+</div>
+
+<style>
+.quiz-opt { display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;cursor:pointer;transition:all 0.15s; }
+.quiz-opt:hover { border-color:#db2777;background:#fdf2f8; }
+.quiz-q { background:#fff;border-radius:8px;padding:16px;border:1px solid var(--border); }
+</style>
+
+<script src="scripts/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initAgent('agent-guide', 'guide');
+  initAgent('agent-quiz', 'quiz');
+  initAgent('agent-boost', 'boost');
+  updateSidebarCredits();
+});
+
+function updateSidebarCredits() {
+  const el = document.getElementById('sidebar-credits');
+  if (el) el.textContent = APP.user ? APP.credits : '--';
+}
+
+function switchTask(num, el) {
+  document.querySelectorAll('.task-item').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  for (let i = 1; i <= 5; i++) {
+    const c = document.getElementById(`task-content-${i}`);
+    if (c) c.style.display = i === num ? 'block' : 'none';
+  }
+}
+
+function nextTask(num) {
+  if (!APP.user) { openLoginModal(); return; }
+  const items = document.querySelectorAll('.task-item');
+  const prevItem = items[num - 2];
+  if (prevItem) { prevItem.classList.add('done'); prevItem.querySelector('.task-num').textContent = '✓'; }
+  APP.markDone('p5', `t${num - 1}`);
+  if (num <= 5) switchTask(num, items[num - 1]);
+}
+
+function calcFCR() {
+  const total = parseFloat(document.getElementById('total-tickets').value);
+  const resolved = parseFloat(document.getElementById('resolved-tickets').value);
+  if (!total || !resolved) return;
+  const fcr = (resolved / total * 100).toFixed(1);
+  document.getElementById('fcr-result').textContent = `FCR = ${fcr}%`;
+}
+
+function submitQuiz5() {
+  if (!APP.user) { openLoginModal(); return; }
+  const answers = { p5q1: 'b', p5q2: 'c', p5q3: 'b' };
+  let correct = 0;
+  for (const [q, a] of Object.entries(answers)) {
+    const sel = document.querySelector(`input[name="${q}"]:checked`);
+    if (sel && sel.value === a) correct++;
+  }
+  const resultEl = document.getElementById('quiz-result5');
+  resultEl.style.display = 'block';
+  if (correct === 3) {
+    resultEl.innerHTML = '<div style="padding:12px;background:#f0fdf4;border-radius:8px;color:#16a34a;font-size:14px;font-weight:500">&#127881; 全部正确！获得 <strong>+20积分</strong></div>';
+    APP.earnCredits(20, '完成项目五自测');
+    updateSidebarCredits();
+  } else {
+    resultEl.innerHTML = `<div style="padding:12px;background:#fdf2f8;border-radius:8px;color:#db2777;font-size:14px">答对 ${correct}/3 题。建议复习FCR/NPS相关内容。</div>`;
+  }
+  APP.logInteraction('project5_quiz', 0);
+}
+</script>
+</body>
+</html>
