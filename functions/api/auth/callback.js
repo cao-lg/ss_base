@@ -59,17 +59,21 @@ export async function onRequestGet({ env, request }) {
   const redirectUri = `${url.origin}/api/auth/callback`;
 
   try {
-    /* 2. 用 code 换 access_token */
+    /* 2. 用 code 换 access_token
+     * Coze OAuth2 token endpoint 要求：
+     * - Content-Type: application/x-www-form-urlencoded
+     * - client_id / client_secret 放在 body（form 字段），不是 Basic Auth
+     */
     const tokenResp = await fetch('https://api.coze.cn/api/permission/oauth2/token', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
         client_id:     clientId,
         client_secret: clientSecret,
         code:          code,
         grant_type:    'authorization_code',
         redirect_uri:  redirectUri,
-      }),
+      }).toString(),
     });
 
     const tokenData = await tokenResp.json();

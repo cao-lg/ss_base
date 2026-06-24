@@ -84,13 +84,13 @@ async function refreshCozeToken(env, refreshToken) {
     const { clientId, clientSecret } = getOAuthConfig(env);
     const resp = await fetch(COZE_OAUTH_TOKEN_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
         client_id: clientId,
         client_secret: clientSecret,
         grant_type: 'refresh_token',
         refresh_token: refreshToken,
-      }),
+      }).toString(),
     });
     const data = await resp.json();
     if (data.access_token) return data;
