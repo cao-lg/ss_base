@@ -9,7 +9,7 @@
  * 5. 设置 cookie，重定向到首页
  */
 import KV from '../../lib/kv.js';
-import { COZE_API_BASE, COZE_OAUTH_TOKEN_URL } from '../../lib/config.js';
+import { COZE_API_BASE, COZE_OAUTH_TOKEN_URL, getOAuthConfig } from '../../lib/config.js';
 
 export async function onRequestGet({ env, request }) {
   const url = new URL(request.url);
@@ -19,18 +19,20 @@ export async function onRequestGet({ env, request }) {
   // Coze 授权失败
   if (error) {
     const errorDesc = url.searchParams.get('error_description') || error;
-    return new Response(`授权失败: ${errorDesc}`, {
+    return new Response(renderErrorPage(`授权失败: ${errorDesc}`), {
       status: 400,
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     });
   }
 
   if (!code) {
-    return new Response('授权失败：缺少 code 参数', { status: 400 });
+    return new Response(renderErrorPage('授权失败：缺少 code 参数'), {
+      status: 400,
+      headers: { 'Content-Type': 'text/html; charset=utf-8' },
+    });
   }
 
-  const clientId = env.COZE_OAUTH_CLIENT_ID;
-  const clientSecret = env.COZE_OAUTH_CLIENT_SECRET;
+  const { clientId, clientSecret } = getOAuthConfig(env);
   const redirectUri = `${url.origin}/api/auth/callback`;
 
   // Step 1: 用授权码换取 token
@@ -50,7 +52,7 @@ export async function onRequestGet({ env, request }) {
 
   if (!tokenData.access_token) {
     const errMsg = tokenData.error_description || tokenData.error || JSON.stringify(tokenData);
-    return new Response(`获取 token 失败: ${errMsg}`, {
+    return new Response(renderErrorPage(`获取 token 失败: ${errMsg}`), {
       status: 400,
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     });
@@ -61,7 +63,6 @@ export async function onRequestGet({ env, request }) {
   const expiresIn = tokenData.expires_in || 7200;
 
   // Step 2: 获取用户信息
-  // Coze token 响应可能直接包含用户信息，也可能需要单独调用 API
   let userId = tokenData.user_id || tokenData.sub || '';
   let userName = tokenData.nickname || tokenData.name || '';
   let avatar = tokenData.avatar_url || tokenData.picture || '';
@@ -86,7 +87,7 @@ export async function onRequestGet({ env, request }) {
     }
   }
 
-  // Fallback: 如果仍无法获取 user_id，从 token 生成一个稳定的 ID
+  // Fallback: 从 token 生成稳定 ID
   if (!userId) {
     const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(accessToken));
     const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -103,7 +104,6 @@ export async function onRequestGet({ env, request }) {
   let user = await KV.getUser(env, userId);
   if (!user) {
     user = await KV.createUser(env, userId, userName);
-    // 记录首次登录日志
     await KV.addLog(env, userId, {
       action: 'first_login',
       agentType: null,
@@ -136,4 +136,16 @@ export async function onRequestGet({ env, request }) {
     status: response.status,
     headers,
   });
+}
+
+function renderErrorPage(msg) {
+  return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>登录错误</title>
+<style>body{font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f5f5f5}
+.err{background:#fff;padding:40px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1);max-width:500px;text-align:center}
+.err h2{color:#e24b4a;margin-bottom:12px}.err p{color:#666;line-height:1.6}
+.err a{display:inline-block;margin-top:20px;padding:10px 24px;background:#4f46e5;color:#fff;border-radius:8px;text-decoration:none}
+</style></head>
+<body><div class="err"><h2>登录失败</h2><p>${msg}</p><a href="/">返回首页</a></div></body></html>`;
 }

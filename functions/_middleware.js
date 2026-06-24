@@ -7,7 +7,7 @@
  *   3. 注入到 data.userData 供后续 handler 使用
  */
 import KV from './lib/kv.js';
-import { COZE_OAUTH_TOKEN_URL } from './lib/config.js';
+import { COZE_OAUTH_TOKEN_URL, getOAuthConfig } from './lib/config.js';
 
 export async function onRequest(context) {
   const { request, env, data, next } = context;
@@ -78,12 +78,13 @@ function jsonResponse(data, status = 200) {
 
 async function refreshCozeToken(env, refreshToken) {
   try {
+    const { clientId, clientSecret } = getOAuthConfig(env);
     const resp = await fetch(COZE_OAUTH_TOKEN_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        client_id: env.COZE_OAUTH_CLIENT_ID,
-        client_secret: env.COZE_OAUTH_CLIENT_SECRET,
+        client_id: clientId,
+        client_secret: clientSecret,
         grant_type: 'refresh_token',
         refresh_token: refreshToken,
       }),
