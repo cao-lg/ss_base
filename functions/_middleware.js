@@ -38,14 +38,17 @@ export async function onRequest(context) {
 
   // 检查 token 是否过期
   if (session.expiresAt && Date.now() > session.expiresAt) {
-    // 尝试刷新 token
     if (session.refreshToken) {
       const refreshed = await refreshCozeToken(env, session.refreshToken);
       if (refreshed) {
-        session.accessToken = refreshed.access_token;
-        session.expiresAt = Date.now() + refreshed.expires_in * 1000;
+        // 更新当前 session（同一个 sessionId，不创建新的）
+        const sid = sessionMatch[1];
+        session.accessToken  = refreshed.access_token;
+        session.expiresAt   = Date.now() + (refreshed.expires_in || 900) * 1000;
         if (refreshed.refresh_token) session.refreshToken = refreshed.refresh_token;
-        await KV.createSession(env, session); // 更新 session
+        await env.EDU_KV.put(`session:${sid}`, JSON.stringify(session), {
+          expirationTtl: 86400 * 7,
+        });
       } else {
         await KV.deleteSession(env, sessionMatch[1]);
         if (path.startsWith('/api/')) {

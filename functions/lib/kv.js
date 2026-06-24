@@ -98,6 +98,18 @@ const KV = {
     await env.EDU_KV.put(`progress:${userId}`, JSON.stringify(progress));
     return progress;
   },
+
+  // ===== Coze 用户映射 =====
+  // 用 Coze 用户 ID 查找本地用户 key
+  async getUserIdByCozeId(env, cozeUserId) {
+    const userKey = await env.EDU_KV.get(`coze_uid:${cozeUserId}`);
+    return userKey || null;
+  },
+
+  // 绑定 Coze 用户 ID 到本地用户 key
+  async bindCozeUserId(env, cozeUserId, userKey) {
+    await env.EDU_KV.put(`coze_uid:${cozeUserId}`, userKey);
+  },
 };
 
 export default KV;
