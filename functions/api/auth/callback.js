@@ -64,22 +64,28 @@ export async function onRequestGet({ env, request }) {
      * - Content-Type: application/x-www-form-urlencoded
      * - client_id / client_secret 放在 body（form 字段），不是 Basic Auth
      */
+    const tokenBodyParams = new URLSearchParams({
+      client_id:     clientId,
+      client_secret: clientSecret,
+      code:          code,
+      grant_type:    'authorization_code',
+      redirect_uri:  redirectUri,
+    });
     const tokenResp = await fetch('https://api.coze.cn/api/permission/oauth2/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id:     clientId,
-        client_secret: clientSecret,
-        code:          code,
-        grant_type:    'authorization_code',
-        redirect_uri:  redirectUri,
-      }).toString(),
+      body: tokenBodyParams.toString(),
     });
 
-    const tokenData = await tokenResp.json();
+    const tokenBody = await tokenResp.text();
+    let tokenData;
+    try { tokenData = JSON.parse(tokenBody); } catch { tokenData = { raw: tokenBody }; }
+
     if (!tokenResp.ok || !tokenData.access_token) {
       const msg = tokenData.message || tokenData.msg || JSON.stringify(tokenData);
-      return renderErrorPage(`令牌获取失败：${msg}`);
+      // DEBUG: 暴露关键信息用于排查，确认后删除
+      const debug = ` [DEBUG clientId=${clientId?.slice(0,10)}... secret_len=${clientSecret?.length} ct=${tokenResp.headers.get('content-type')} status=${tokenResp.status}]`;
+      return renderErrorPage(`令牌获取失败：${msg}${debug}`);
     }
 
     const { access_token, refresh_token, expires_in } = tokenData;
