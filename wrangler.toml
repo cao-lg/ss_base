@@ -1,0 +1,10 @@
+name = "ss-base"
+compatibility_date = "2024-01-01"
+
+# KV 命名空间绑定
+# 部署前先在 Cloudflare Dashboard 创建 KV namespace: EDU_KV
+# 然后在 Pages 项目设置 → Functions → KV namespace bindings 中绑定
+# 或在此文件配置（需要 wrangler CLI）:
+[[kv_namespaces]]
+binding = "EDU_KV"
+id = ""  # 部署时替换为真实 KV namespace ID
