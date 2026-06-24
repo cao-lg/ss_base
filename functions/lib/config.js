@@ -64,5 +64,12 @@ export function getAllAgents() {
 export const COZE_API_BASE = 'https://api.coze.cn';
 export const COZE_OAUTH_BASE = 'https://www.coze.cn';
 
-// OAuth scope
-export const OAUTH_SCOPE = 'bot.findById bot.message.feedback bot.message.list bot.update bot.store.search user.info.feature.switch.get user.info.feature.switch.update bot.chat bot.conversation.message.recall conversation.chat';
+// OAuth API 端点（基于 Coze 官方文档 + 火山引擎实战验证）
+// 授权页面 URL API — 返回 302 重定向到 consent 授权页
+export const COZE_OAUTH_AUTHORIZE_URL = 'https://api.coze.cn/api/permission/oauth2/authorize';
+// Token 交换 & 刷新 API
+export const COZE_OAUTH_TOKEN_URL = 'https://api.coze.cn/api/permission/oauth2/token';
+
+// OAuth scope — 根据实际需要的权限配置
+// 在 Coze 创建 OAuth 应用时，也需要在权限页签勾选对应权限
+export const OAUTH_SCOPE = 'bot chat conversation';
