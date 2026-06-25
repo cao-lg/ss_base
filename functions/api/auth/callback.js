@@ -61,33 +61,24 @@ export async function onRequestGet({ env, request }) {
   const redirectUri = `${url.origin}/api/auth/callback`;
 
   try {
-    /* 2. 用 code 换 access_token
-     * Coze OAuth2 token endpoint 要求：
-     * - Content-Type: application/x-www-form-urlencoded
-     * - client_id / client_secret 放在 body（form 字段），不是 Basic Auth
-     */
-    const tokenBodyParams = new URLSearchParams({
-      client_id:     clientIdStr,
-      client_secret: clientSecretStr,
-      code:          code,
-      grant_type:    'authorization_code',
-      redirect_uri:  redirectUri,
-    });
+    /* 2. 用 code 换 access_token（Web Application Flow）*/
     const tokenResp = await fetch('https://api.coze.cn/api/permission/oauth2/token', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: tokenBodyParams.toString(),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client_id:     clientIdStr,
+        client_secret: clientSecretStr,
+        code:          code,
+        grant_type:    'authorization_code',
+        redirect_uri:  redirectUri,
+      }),
     });
 
-    const tokenBody = await tokenResp.text();
-    let tokenData;
-    try { tokenData = JSON.parse(tokenBody); } catch { tokenData = { raw: tokenBody }; }
+    const tokenData = await tokenResp.json();
 
     if (!tokenResp.ok || !tokenData.access_token) {
       const msg = tokenData.message || tokenData.msg || JSON.stringify(tokenData);
-      // DEBUG: 暴露关键信息用于排查，确认后删除
-      const debug = ` [DEBUG raw_secret_len=${clientSecret?.length} trim_secret_len=${clientSecretStr.length} ct_req=application/x-www-form-urlencoded ct_resp=${tokenResp.headers.get('content-type')} status=${tokenResp.status}]`;
-      return renderErrorPage(`令牌获取失败：${msg}${debug}`);
+      return renderErrorPage(`令牌获取失败：${msg}`);
     }
 
     const { access_token, refresh_token, expires_in } = tokenData;

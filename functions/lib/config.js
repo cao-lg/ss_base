@@ -13,7 +13,7 @@
 
 // ===== OAuth 凭证（fallback，优先使用 Cloudflare 环境变量）=====
 export const OAUTH_CLIENT_ID = '65921753529999591828073675215369.app.coze';
-export const OAUTH_CLIENT_SECRET = 'gfNu2Tky2FirE5l3MfPUmNJ3CoUlySvrtXd7Q6i9R03NUt1R';
+export const OAUTH_CLIENT_SECRET = 'AnPUPGdp4mLM8wX4Cc1WssW05jtEGUFMxFAQqTAQ3mIfhu8W';
 
 /**
  * 获取 OAuth 配置（优先环境变量，fallback 到本文件）
