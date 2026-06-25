@@ -20,8 +20,8 @@ export const OAUTH_CLIENT_SECRET = 'gfNu2Tky2FirE5l3MfPUmNJ3CoUlySvrtXd7Q6i9R03N
  */
 export function getOAuthConfig(env) {
   return {
-    clientId: env.COZE_OAUTH_CLIENT_ID || OAUTH_CLIENT_ID,
-    clientSecret: env.COZE_OAUTH_CLIENT_SECRET || OAUTH_CLIENT_SECRET,
+    clientId:     (env.COZE_OAUTH_CLIENT_ID     || OAUTH_CLIENT_ID).trim(),
+    clientSecret: (env.COZE_OAUTH_CLIENT_SECRET || OAUTH_CLIENT_SECRET).trim(),
   };
 }
 

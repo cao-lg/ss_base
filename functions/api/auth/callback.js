@@ -52,7 +52,9 @@ export async function onRequestGet({ env, request }) {
   }
 
   const { clientId, clientSecret } = getOAuthConfig(env);
-  if (!clientId || !clientSecret) {
+  const clientIdStr     = String(clientId || '').trim();
+  const clientSecretStr = String(clientSecret || '').trim();
+  if (!clientIdStr || !clientSecretStr) {
     return renderErrorPage('服务器 OAuth 配置缺失，请联系管理员。');
   }
 
@@ -65,8 +67,8 @@ export async function onRequestGet({ env, request }) {
      * - client_id / client_secret 放在 body（form 字段），不是 Basic Auth
      */
     const tokenBodyParams = new URLSearchParams({
-      client_id:     clientId,
-      client_secret: clientSecret,
+      client_id:     clientIdStr,
+      client_secret: clientSecretStr,
       code:          code,
       grant_type:    'authorization_code',
       redirect_uri:  redirectUri,
@@ -84,7 +86,7 @@ export async function onRequestGet({ env, request }) {
     if (!tokenResp.ok || !tokenData.access_token) {
       const msg = tokenData.message || tokenData.msg || JSON.stringify(tokenData);
       // DEBUG: 暴露关键信息用于排查，确认后删除
-      const debug = ` [DEBUG clientId=${clientId?.slice(0,10)}... secret_len=${clientSecret?.length} ct=${tokenResp.headers.get('content-type')} status=${tokenResp.status}]`;
+      const debug = ` [DEBUG raw_secret_len=${clientSecret?.length} trim_secret_len=${clientSecretStr.length} ct_req=application/x-www-form-urlencoded ct_resp=${tokenResp.headers.get('content-type')} status=${tokenResp.status}]`;
       return renderErrorPage(`令牌获取失败：${msg}${debug}`);
     }
 
